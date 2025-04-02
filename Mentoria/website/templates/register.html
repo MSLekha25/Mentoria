@@ -543,8 +543,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.jpg" alt="Mentoria Logo">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="/static/logo.jpg" alt="Mentoria Logo">
                 <div class="brand-text">
                     <span>Mentoria</span>
                     <span>Institute</span>
@@ -554,7 +554,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="https://powerpitch.co.in/">Home</a>
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
                 </ul>
             </div>
@@ -564,7 +564,7 @@
     <div class="container1">
         <div class="left-section">
             <div class="logo-container">
-                <img src="logo.jpg" alt="Logo">
+                <img src="/static/logo.jpg" alt="Logo">
             </div>
             <div class="welcome-text">
                 <h2>Welcome Back!</h2>
@@ -574,7 +574,7 @@
         <div class="right-section">
             <div class="video-container">
                 <video autoplay muted loop playsinline>
-                    <source src="A1.mp4" type="video/mp4">
+                    <source src="/static/A1.mp4" type="video/mp4">
                 </video>
             </div>  
             <div class="registration-container">

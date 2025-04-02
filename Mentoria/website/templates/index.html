@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Institute</title>
+    <link rel="icon" type="image/jpg" href="/static/mentoria-logo.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Iceberg', sans-serif;
+            background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
+            min-height: 100vh;
+            color: var(--light-text);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            margin: 0;
+            padding: 1rem 0;
+            background: rgba(26, 35, 126, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            padding: 0;
+            margin-right: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 65px;
+            width: 65px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(248, 248, 242, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand .brand-text {
+            margin-left: 1rem;
+            line-height: 1.2;
+            color: var(--off-white);
+        }
+
+        .navbar-brand .brand-text span {
+            display: block;
+        }
+
+        .navbar-brand img:hover {
+            box-shadow: 0 0 20px rgba(248, 248, 242, 0.5);
+        }
+
+        .nav-link {
+            color: var(--off-white) !important;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link:hover {
+            color: var(--light-gray) !important;
+            transform: scale(1.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--off-white);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: calc(100vh - 20px);
+            display: flex;
+            align-items: center;
+            perspective: 2500px;
+            transform-style: preserve-3d;
+            overflow: visible;
+            background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
+            margin-top: 0;
+            padding: 6rem 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 0;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+            pointer-events: none;
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-logo-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-logo {
+            height: 90%;
+            width: 90%;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            box-shadow: 
+                0 0 150px rgba(248, 248, 242, 0.5),
+                inset 0 0 50px rgba(255, 255, 255, 0.2);
+            animation: logoGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 150px rgba(248, 248, 242, 0.5),
+                    inset 0 0 50px rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 200px rgba(248, 248, 242, 0.7),
+                    inset 0 0 70px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .floating-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            pointer-events: none;
+            animation: orbit 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            /* opacity: 0.8; */
+        }
+
+        /* Position and animation delay for each icon */
+        .floating-icon:nth-child(2) {
+            --orbit-radius: 250px;
+            animation-delay: 0s;
+        }
+        .floating-icon:nth-child(3) {
+            --orbit-radius: 250px;
+            animation-delay: -2.4s;
+        }
+        .floating-icon:nth-child(4) {
+            --orbit-radius: 250px;
+            animation-delay: -4.8s;
+        }
+        .floating-icon:nth-child(5) {
+            --orbit-radius: 250px;
+            animation-delay: -7.2s;
+        }
+        .floating-icon:nth-child(6) {
+            --orbit-radius: 250px;
+            animation-delay: -9.6s;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg) scale(0.8);
+                filter: brightness(0.8);
+            }
+            25% {
+                transform: rotate(90deg) translateX(var(--orbit-radius)) rotate(-90deg) scale(1);
+                filter: brightness(1.2);
+            }
+            50% {
+                transform: rotate(180deg) translateX(var(--orbit-radius)) rotate(-180deg) scale(0.8);
+                filter: brightness(0.8);
+            }
+            75% {
+                transform: rotate(270deg) translateX(var(--orbit-radius)) rotate(-270deg) scale(1);
+                filter: brightness(1.2);
+            }
+            100% {
+                transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg) scale(0.8);
+                filter: brightness(0.8);
+            }
+        }
+
+        .floating-icon:hover {
+            animation-play-state: paused;
+            opacity: 1;
+            filter: brightness(1.5);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 992px) {
+            .floating-icon:nth-child(n) {
+                --orbit-radius: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-icon {
+                width: 45px;
+                height: 45px;
+            }
+            .floating-icon:nth-child(n) {
+                --orbit-radius: 140px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .floating-icon {
+                width: 35px;
+                height: 35px;
+            }
+            .floating-icon:nth-child(n) {
+                --orbit-radius: 120px;
+            }
+        }
+
+        .hero-text {
+            text-align: left;
+            color: var(--light-gray);
+            animation: textFadeIn 1s ease-out;
+        }
+
+        @keyframes textFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);   
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--light-text), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGradient 8s ease infinite;
+        }
+
+        @keyframes titleGradient {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(30deg) brightness(1.2); }
+        }
+
+        .hero-text h1 span {
+            display: block;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text h1 span {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text h1 span {
+                font-size: 3.5rem;
+            }
+
+            .logos-slide {
+                width: 150px;
+            }
+
+            .logos-slide-track {
+                width: calc(150px * 32);
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(calc(-150px * 16));
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text h1 span {
+                font-size: 3rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .hero-logo-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .floating-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logos-slide {
+                width: 120px;
+            }
+
+            .logos-slide-track {
+                width: calc(120px * 32);
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(calc(-120px * 16));
+                }
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-text h1 span {
+                font-size: 2.5rem;
+            }
+
+            .logos-slide {
+                width: 100px;
+            }
+
+            .logos-slide-track {
+                width: calc(100px * 32);
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(calc(-100px * 16));
+                }
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--off-white);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .footer-heading {
+            color: var(--light-gray);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-contact a {
+            color: var(--off-white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: var(--light-gray);
+        }
+
+        .social-icons a {
+            color: var(--off-white);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--light-gray);
+            transform: scale(1.2);
+        }
+
+        #scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: whitesmoke;
+            color: var(--gradient-start);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        #scrollToTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scrollToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Company Logos Slider */
+        .logos-section {
+            background: var(--off-white);
+            overflow: hidden;
+            width: 80%;
+            margin: 0.2rem auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .logos-section h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .logos-slide-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            width: calc(200px * 32);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-200px * 16));
+            }
+        }
+
+        .logos-slide {
+            width: 120px;
+            padding: 0.5rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logos-slide img {
+            width: 100%;
+            height: 40px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .logos-slide img:hover {
+            transform: scale(1.1);
+        }
+
+        .logos-container {
+            margin: 0.5rem auto;
+            position: relative;
+            overflow: hidden;
+            padding: 0.5rem 0;
+            height: 60px;
+            /* width: 80%; */
+            background: linear-gradient(90deg, var(--off-white) 0%, transparent 5%, transparent 95%, var(--off-white) 100%);
+        }
+
+        @media (max-width: 992px) {
+            .logos-slide {
+                width: 150px;
+            }
+
+            .logos-slide img {
+                height: 35px;
+            }
+
+            .logos-container {
+                height: 55px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logos-slide {
+                width: 120px;
+            }
+
+            .logos-slide img {
+                height: 30px;
+            }
+
+            .logos-container {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logos-slide {
+                width: 100px;
+            }
+
+            .logos-slide img {
+                height: 25px;
+            }
+
+            .logos-container {
+                height: 45px;
+            }
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--medium-gray) 100%);
+            color: var(--off-white);
+            margin: 2rem auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-label {
+            font-size: 1.5rem;
+            color: var(--light-gray);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .stat-text{
+            color: var(--off-white);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: numberPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            .col-sm-6 {
+                width: 50%;
+            }
+
+            .hero-logo-container {
+                width: 300px;
+                height: 300px;
+                margin-top: 2rem;
+            }
+
+            .floating-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background-color: var(--off-white);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .faq-section .contact-text {
+            text-align: center;
+            color: var(--medium-gray);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .faq-section .contact-text a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .faq-section .contact-text a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            /* padding-bottom: 1.5rem; */
+        }
+
+        .faq-question {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            /* margin-bottom: 1rem; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .faq-section h2 {
+                font-size: 2.5rem;
+            }
+            .faq-question {
+                font-size: 1.2rem;
+            }
+            .faq-answer {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .faq-section h2 {
+                font-size: 2rem;
+            }
+            .faq-question {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .events-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 3rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .event-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-date {
+            min-width: 120px;
+            text-align: left;
+        }
+
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+        }
+
+        .event-details {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .event-details h3 {
+            margin: 0 0 1rem;
+            color: var(--primary-dark);
+        }
+
+        .event-details p {
+            margin: 0 0 1rem;
+            color: var(--medium-gray);
+        }
+
+        .event-location {
+            min-width: 200px;
+            text-align: right;
+        }
+
+        .event-time {
+            font-weight: 500;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-address {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .event-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .event-link:hover {
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .event-card {
+                flex-direction: column;
+            }
+
+            .event-date {
+                margin-bottom: 1rem;
+            }
+
+            .event-details {
+                padding: 1rem 0;
+            }
+
+            .event-location {
+                text-align: left;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Empowerment Section */
+        .empowerment-section {
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .empowerment-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 3rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .empowerment-card {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .empowerment-image {
+            flex: 1;
+            max-width: 40%;
+        }
+
+        .empowerment-image img {
+            width: 90%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(236, 26, 26, 0.1);
+        }
+
+        .empowerment-content {
+            flex: 1;
+        }
+
+        .empowerment-content h3 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .empowerment-content p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 992px) {
+            .empowerment-card {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .empowerment-image {
+                max-width: 100%;
+            }
+
+            .empowerment-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .empowerment-content h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .empowerment-section h2 {
+                font-size: 2rem;
+            }
+
+            .empowerment-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .empowerment-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Global styles for main content */
+        main {
+            position: relative;
+            overflow: hidden;
+            color: var(--light-text);
+            margin-top: 0 !important;
+            padding-top: 80px;
+        }
+
+        main::before {
+            display: none;
+        }
+
+        main > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animation for sections entering viewport */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Updated text colors for better visibility */
+        .section-title {
+            color: var(--light-text);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-description {
+            color: var(--light-gray);
+        }
+
+        /* Card and content styles */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .card-title {
+            color: var(--light-text);
+        }
+
+        .card-text {
+            color: var(--light-gray);
+        }
+
+        /* FAQ section styles */
+        .faq-section {
+            background: transparent;
+        }
+
+        .faq-question {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-answer {
+            color: var(--light-gray);
+        }
+
+        /* Enhanced Global Styles */
+        :root {
+            --primary-dark: #1a237e;
+            --medium-gray: #34495e;
+            --light-gray: #ecf0f1;
+            --off-white: #F8F8F2;
+            --light-text: #ffffff;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.2);
+            --hover-brightness: 1.1;
+            --gradient-start: #1a237e;
+            --gradient-end: #34495e;
+        }
+
+        /* Improved Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        /* Enhanced Card Styles */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        /* Enhanced Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Enhanced Events Section */
+        .events-section {
+            padding: 4rem 0;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-image {
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover .event-image {
+            transform: scale(1.05);
+        }
+
+        /* Enhanced FAQ Section */
+        .faq-question {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            /* margin-bottom: 1rem; */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced Logos Section */
+        .logos-section {
+            padding: 3rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .logos-container img {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0) invert(1) opacity(0.7);
+        }
+
+        .logos-container img:hover {
+            filter: brightness(1) invert(0) opacity(1);
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        /* Enhanced Buttons */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            background: var(--accent-color);
+            color: var(--light-text);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: #2980b9;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent-hover);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* Enhanced Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 1rem auto;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+            transform-origin: center;
+        }
+
+        .section-title.visible::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link::after {
+            bottom: 0;
+            left: 50%;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: rgba(26, 35, 126, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent, 
+                var(--accent-color),
+                transparent
+            );
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Improved Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .stat-card {
+                margin-bottom: 2rem;
+            }
+
+            .event-card {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .navbar-collapse {
+                background: rgba(26, 35, 126, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Link Styles */
+        a {
+            transition: all 0.3s ease;
+            color: var(--accent-color);
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: none;
+        }
+
+        /* Section Styling */
+        section {
+            position: relative;
+            padding: 6rem 0;
+            background: linear-gradient(
+                180deg,
+                transparent,
+                rgba(26, 35, 126, 0.3) 10%,
+                rgba(26, 35, 126, 0.3) 90%,
+                transparent
+            );
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at var(--mouse-x, center) var(--mouse-y, center),
+                rgba(52, 152, 219, 0.15),
+                transparent 50%
+            );
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(
+                135deg,
+                rgba(26, 35, 126, 0.4) 0%,
+                rgba(52, 73, 94, 0.4) 100%
+            );
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Events Section */
+        .events-section {
+            background: linear-gradient(
+                45deg,
+                rgba(52, 73, 94, 0.4) 0%,
+                rgba(26, 35, 126, 0.4) 100%
+            );
+            backdrop-filter: blur(10px);
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--light-text);
+        }
+
+        .event-date .day,
+        .event-details h3,
+        .event-time {
+            color: var(--light-text);
+        }
+
+        .event-date .month,
+        .event-details p,
+        .event-address {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(
+                -45deg,
+                rgba(26, 35, 126, 0.4) 0%,
+                rgba(52, 73, 94, 0.4) 100%
+            );
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-section h2,
+        .faq-question {
+            color: var(--light-text);
+        }
+
+        .faq-section .contact-text,
+        .faq-answer {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Empowerment Section */
+        .empowerment-section {
+            background: linear-gradient(
+                225deg,
+                rgba(52, 73, 94, 0.4) 0%,
+                rgba(26, 35, 126, 0.4) 100%
+            );
+            backdrop-filter: blur(10px);
+        }
+
+        .empowerment-content h3 {
+            color: var(--light-text);
+        }
+
+        .empowerment-content p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empowerment-image img {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logos Section */
+        .logos-section {
+            /* padding: 3rem 0; */
+            background: linear-gradient(
+                to right,
+                rgba(26, 35, 126, 0.4) 0%,
+                rgba(52, 73, 94, 0.4) 50%,
+                rgba(26, 35, 126, 0.4) 100%
+            );
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Section Title Styling */
+        .section-title {
+            color: var(--light-text);
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                var(--accent-color),
+                transparent
+            );
+        }
+
+        /* Enhanced Section Headings */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-heading h2 {
+            font-size: 3rem;
+            color: var(--light-text);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-heading h2::before {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--accent-color),
+                transparent
+            );
+        }
+
+        .section-heading p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 1rem auto 0;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Section Styling */
+        section {
+            position: relative;
+            padding: 8rem 0;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+        }
+
+        /* Enhanced Card Styling */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                225deg,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Enhanced Event Cards */
+        .event-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .event-date {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        /* Enhanced FAQ Items */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            /* padding: 2rem; */
+            /* margin-bottom: 1.5rem; */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .faq-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--light-text);
+            /* margin-bottom: 1rem; */
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            .section-heading h2 {
+                font-size: 2.5rem;
+            }
+
+            .section-heading p {
+                font-size: 1.1rem;
+            }
+
+            .event-details h3 {
+                font-size: 1.3rem;
+            }
+
+            .faq-question {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-heading h2 {
+                font-size: 2rem;
+            }
+
+            .section-heading p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation for Section Headings */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-heading {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="/static/logo.jpg" alt="Mentoria Logo">
+                <div class="brand-text">
+                    <span>Mentoria</span>
+                    <span>Institute</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-user-circle"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container-fluid" style="margin-top: 0 !important; padding-top: 80px;">
+        <!-- Hero Section -->
+        <section class="container hero-section animate-on-scroll">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="hero-text">
+                        <h1>Welcome to<span>Mentoria Institute</span></h1>
+                        <p>where we transform careers through expert guidance and industry-leading training. Our mission
+                            is to empower professionals with cutting-edge skills and real-world experience.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="hero-logo-container">
+                        <img src="/static/logo.jpg" alt="Mentoria Logo" class="hero-logo">
+                        <img src="/static/floating-logos/corporate-training.png" alt="Corporate Training" class="floating-icon icon-1">
+                        <img src="/static/floating-logos/hr-interview.png" alt="HR Interview" class="floating-icon icon-2">
+                        <img src="/static/floating-logos/it-skill.jpg" alt="IT Skills" class="floating-icon icon-3">
+                        <img src="/static/floating-logos/management-skills.png" alt="Management Skills" class="floating-icon icon-4">
+                        <img src="/static/floating-logos/placements.jpg" alt="Placements" class="floating-icon icon-5">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <h2 class="section-heading">Mentors from Top Companies</h2>
+        </div>
+        <!-- Company Logos Section -->
+        <section class="logos-section animate-on-scroll">
+            <div class="logos-container">
+                <div class="logos-slide-track">
+                    <!-- First set of logos -->
+                    <div class="logos-slide">
+                        <img src="/static/companies/Acccenture.png" alt="Accenture">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/amazon.png" alt="Amazon">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/cisco.png" alt="Cisco">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/deloitte.png" alt="Deloitte">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/DriveWealth.png" alt="DriveWealth">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/E & Y.png" alt="E & Y">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/hp.png" alt="HP">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/INFOSIS.png" alt="Infosys">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Kroll.png" alt="Kroll">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/roche-logo.png" alt="Roche">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/sap.png" alt="SAP">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/SCHNIDER.png" alt="Schneider">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/tech-mahindra.png" alt="Tech Mahindra">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Concentrix.png" alt="Concentrix">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/TexaxEnergy Holdings inc.png" alt="Texas Energy">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Quater Site Power.webp" alt="Quarter Site Power">
+                    </div>
+                    <!-- Duplicate set for seamless scrolling -->
+                    <div class="logos-slide">
+                        <img src="/static/companies/Acccenture.png" alt="Accenture">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/amazon.png" alt="Amazon">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/cisco.png" alt="Cisco">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/deloitte.png" alt="Deloitte">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/DriveWealth.png" alt="DriveWealth">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/E & Y.png" alt="E & Y">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/hp.png" alt="HP">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/INFOSIS.png" alt="Infosys">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Kroll.png" alt="Kroll">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/roche-logo.png" alt="Roche">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/sap.png" alt="SAP">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/SCHNIDER.png" alt="Schneider">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/tech-mahindra.png" alt="Tech Mahindra">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Concentrix.png" alt="Concentrix">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/TexaxEnergy Holdings inc.png" alt="Texas Energy">
+                    </div>
+                    <div class="logos-slide">
+                        <img src="/static/companies/Quater Site Power.webp" alt="Quarter Site Power">
+                    </div>
+
+                </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section animate-on-scroll">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-label">Successfully Trained</div>
+                        <div class="stat-number" data-target="2150">0</div>
+                        <div class="stat-text">Enrolled Learners</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-label">Placement</div>
+                        <div class="stat-number" data-target="4">0</div>
+                        <div class="stat-text">OFFER LETTERS ROLLED</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-label">Companies</div>
+                        <div class="stat-number" data-target="20">0</div>
+                        <div class="stat-text">ONBOARDED</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-label">Partnered With</div>
+                        <div class="stat-number" data-target="6">0</div>
+                        <div class="stat-text">INSTITUTIONS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Empowerment Section -->
+         <section class="empowerment-section animate-on-scroll">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>EMPOWERING YOUNG MINDS FOR SUCCESS</h2>
+                    <p>Join us for these transformative learning experiences</p>
+                </div>
+                <div class="empowerment-card">
+                    <div class="empowerment-image">
+                        <img src="/static/man.png" alt="Corporate Etiquette Training">
+                    </div>
+                    <div class="empowerment-content">
+                        <h3>Corporate Etiquette Training</h3>
+                        <p>Our corporate etiquette training equips students with the essential skills required for professional environments. We focus on communication, dressing appropriately, and building confidence, ensuring our participants stand out in interviews and workplaces.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section class="events-section animate-on-scroll">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Upcoming Events</h2>
+                    <p>Join us for these transformative learning experiences</p>
+                </div>
+                <div class="events-container">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <div class="day">27th</div>
+                            <div class="month">Jan</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Sunday Supper Club</h3>
+                            <p>A culinary event with foods from all over the world. This is a weekly club you can join for a small fee. Learn cooking methods from top chef...</p>
+                            <a href="#" class="event-link">+ Event Details</a>
+                        </div>
+                        <div class="event-location">
+                            <div class="event-time">12:30 pm - 3:30 pm</div>
+                            <div class="event-address">144 W Elm St, Chicago, IL<br>60610, USA</div>
+                        </div>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-date">
+                            <div class="day">29th</div>
+                            <div class="month">Jan</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Evenings in the Park</h3>
+                            <p>We invite you to listen to live bands play beautiful music in the park. Enjoy the sounds of Laureen Davis and the Kings, and enjoy wine tast...</p>
+                            <a href="#" class="event-link">+ Event Details</a>
+                        </div>
+                        <div class="event-location">
+                            <div class="event-time">3:00 pm - 5:00 am</div>
+                            <div class="event-address">Estuary Park</div>
+                        </div>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-date">
+                            <div class="day">31st</div>
+                            <div class="month">Jan</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Mornign brews and Views</h3>
+                            <p>Enjoy free samples of our latest brews while overlooking the beautiful sits of our city. Plenty of iced and hot teas, plus goutnet coffees</p>
+                            <a href="#" class="event-link">+ Event Details</a>
+                        </div>
+                        <div class="event-location">
+                            <div class="event-time">4:30 am - 11:30 am</div>
+                            <div class="event-address">The Depot at 100 Liberty Street</div>
+                        </div>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-date">
+                            <div class="day">1st</div>
+                            <div class="month">Feb</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Super Saturday Sale</h3>
+                            <p>Every Saturday join us at The Depot for our weekly Super Sale! All items are slashed in price. Bring the whole family.</p>
+                            <a href="#" class="event-link">+ Event Details</a>
+                        </div>
+                        <div class="event-location">
+                            <div class="event-time">11:30 pm - 12:30 pm</div>
+                            <div class="event-address">The Depot at 100 Liberty Street</div>
+                        </div>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-date">
+                            <div class="day">3rd</div>
+                            <div class="month">Feb</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Sunday Supper Club</h3>
+                            <p>A culinary event with foods from all over the world. This is a weekly club you can join for a small fee. Learn cooking methods from top chef...</p>
+                            <a href="#" class="event-link">+ Event Details</a>
+                        </div>
+                        <div class="event-location">
+                            <div class="event-time">12:30 pm 3:30 pm</div>
+                            <div class="event-address">144 W Elm St, Chicago, IL 60610, USA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section animate-on-scroll">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Find answers to common questions about our mentorship program</p>
+                </div>
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What subjects does mentoriainstitute.com offer tutoring in?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            mentoriainstitute.com offers tutoring in a variety of subjects including math, science, English, history, and foreign languages.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Are mentoriainstitute.com's tutors certified?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Many of mentoriainstitute.com's tutors are certified teachers or have advanced degrees in their subject areas. All tutors are highly qualified and experienced in their fields.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What age range does mentoriainstitute.com work with?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            mentoriainstitute.com works with students of all ages, from elementary school through college and beyond.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <div class="footer-contact">
+                        <a href="tel:+1234567890"><i class="fas fa-phone me-2"></i>+1 (234) 567-890</a>
+                        <a href="mailto:info@mentoria.com"><i class="fas fa-envelope me-2"></i>info@mentoria.com</a>
+                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i>123 Education Street, City</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="footer-heading">Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2025 Mentoria. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <a href="#" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll to Top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const count = parseInt(counter.innerText);
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(() => animateCounter(counter), 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        // Start counter animation when the section is in view
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => animateCounter(counter));
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(document.querySelector('.stats-section'));
+
+        // Intersection Observer for scroll animations
+        const observerOptions2 = {
+            threshold: 0.2
+        };
+
+        const observer2 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions2);
+
+        // Add animation classes to sections
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('animate-on-scroll');
+            observer2.observe(section);
+        });
+
+        // Add animation classes to cards and other content
+        document.querySelectorAll('.card, .faq-item, .testimonial-item').forEach(element => {
+            element.classList.add('animate-on-scroll');
+            observer2.observe(element);
+        });
+
+        // Floating icons animation (simplified)
+        const icons = document.querySelectorAll('.floating-icon');
+        let startTime = Date.now();
+
+        function updateIcons() {
+            const currentTime = (Date.now() - startTime) / 1000;
+            
+            icons.forEach((icon, index) => {
+                const offset = Math.sin(currentTime + index) * 20; // 20px amplitude
+                icon.style.transform = `translateY(${offset}px)`;
+            });
+            
+            requestAnimationFrame(updateIcons);
+        }
+
+        updateIcons();
+
+        // FAQ Section Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.classList.contains('show');
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+                
+                // Open clicked answer if it was closed
+                if (!isOpen) {
+                    answer.classList.add('show');
+                    question.classList.add('active');
+                }
+            });
+        });
+
+        // Add this to your JavaScript
+        document.querySelectorAll('section').forEach(section => {
+            section.addEventListener('mousemove', e => {
+                const rect = section.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                section.style.setProperty('--mouse-x', `${x}%`);
+                section.style.setProperty('--mouse-y', `${y}%`);
+            });
+        });
+    </script>
+</body>
+
+</html>

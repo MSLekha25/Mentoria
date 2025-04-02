@@ -317,7 +317,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="/static/logo.jpg" alt="Mentoria Institute Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -326,13 +326,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="about.html">About</a>
+                        <a class="nav-link active" href="{% url 'about' %}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
                 </ul>
             </div>
@@ -370,14 +370,12 @@
                 </div>
             </div>
 
-            
-
             <!-- Team Section -->
             <h2 class="section-title mt-5">Founders of Mentoria Institute</h2>
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-4">
                     <div class="team-member">
-                        <img src="Mentoria\website\static\founders\manoj.jpg" alt="Team Member 1">
+                        <img src="/static/founders/manoj.jpg" alt="Team Member 1">
                         <h3>Mr. Manoj Thadi</h3>
                         <p>Founder/CEO</p>
                         <div class="social-links">
@@ -388,7 +386,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="team-member">
-                        <img src="/static/sonia.jpg" alt="Team Member 2">
+                        <img src="/static/founders/sonia.jpg" alt="Team Member 2">
                         <h3>Miss. Sonia Govindarajulu</h3>
                         <p>Co-Founder/Director</p>
                         <div class="social-links">
@@ -513,11 +511,11 @@
                 <div class="col-md-4 footer-content">
                     <h5>Quick Links</h5>
                     <ul class="footer-links">
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
                         <li><a href="#">Courses</a></li>
                         <li><a href="#">Events</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div>
 
