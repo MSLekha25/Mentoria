@@ -7,6 +7,7 @@
     <title>Mentoria Institute</title>
     <link rel="icon" type="image/jpg" href="/static/logo.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-dark: #1a237e;
@@ -16,7 +17,7 @@
             --light-text: #ffffff;
             --accent-color: #3498db;
             --accent-hover: #2980b9;
-            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --card-border: rgba(255, 255, 255, 0.2);
             --hover-brightness: 1.1;
             --gradient-start: #1a237e;
@@ -24,32 +25,28 @@
         }
 
         body {
-            font-family: 'Iceberg', sans-serif;
-            background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--medium-gray) 100%);
             min-height: 100vh;
-            color: var(--light-text);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
-
-            backdrop-filter: blur(5px);
-            margin: 0;
             background: rgba(26, 35, 126, 0.95) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
-            padding: 0;
-            margin-right: 2rem;
             display: flex;
             align-items: center;
         }
 
         .navbar-brand img {
-            height: 65px;
-            width: 65px;
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
             box-shadow: 0 0 15px rgba(248, 248, 242, 0.3);
             transition: all 0.3s ease;
@@ -65,10 +62,6 @@
             display: block;
         }
 
-        .navbar-brand img:hover {
-            box-shadow: 0 0 20px rgba(248, 248, 242, 0.5);
-        }
-
         .nav-link {
             color: var(--off-white) !important;
             margin: 0 10px;
@@ -79,7 +72,7 @@
 
         .nav-link:hover {
             color: var(--light-gray) !important;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .nav-link::after {
@@ -98,298 +91,57 @@
             width: 100%;
         }
 
-        .nav-link {
-            position: relative;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .navbar-collapse {
-                background: rgba(26, 35, 126, 0.98);
-                padding: 1rem;
-                border-radius: 10px;
-                backdrop-filter: blur(10px);
-            }
-        }
-
-        /* Smooth Scroll Behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Enhanced Link Styles */
-        a {
-            transition: all 0.3s ease;
-            color: var(--accent-color);
-        }
-
-        a:hover {
-            color: var(--accent-hover);
-            text-decoration: none;
-        }
-
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes borderGlow {
-            0% { border-color: var(--primary-dark); box-shadow: 0 0 10px var(--primary-dark); }
-            50% { border-color: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); }
-            100% { border-color: var(--primary-dark); box-shadow: 0 0 10px var(--primary-dark); }
-        }
-
-        @keyframes inputBorderRotate {
-            0% { border-image: linear-gradient(0deg, var(--primary-dark), var(--accent-color)) 1; }
-            100% { border-image: linear-gradient(360deg, var(--primary-dark), var(--accent-color)) 1; }
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* background: #1a237e; */
-            color: var(--light-text);
-        }
-
-        .container1 {
-            display: flex;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            width: 1200px;
-            height: 600px;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.8s ease-out;
-            margin-top: 5rem;
-        }
-
-        .left-section {
-            flex: 0.3;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-container {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        .logo-container:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .welcome-text {
-            text-align: center;
-            color: var(--primary-dark);
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-top: 20px;
-            animation: fadeIn 1s ease-out 0.3s backwards;
-        }
-
-        .welcome-text h2 {
-            margin-bottom: 15px;
-            color: var(--primary-dark);
-        }
-
-        .right-section {
-            flex: 0.7;
-            display: flex;
-            background: white;
-            border-left: 1px solid var(--card-border);
-        }
-
-        .video-container {
+        .main-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            height: 100%;
+            padding: 2rem 0;
         }
 
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .login-container {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            animation: fadeIn 0.8s ease-out 0.5s backwards;
-            border: 2px solid var(--primary-dark);
-            border-radius: 15px;
-            animation: borderGlow 3s infinite ease-in-out;
-            margin: 20px;
-        }
-
-        .registration-container {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.05);
-            animation: fadeIn 0.8s ease-out 0.5s backwards;
-            border: 2px solid var(--primary-dark);
-            border-radius: 15px;
-            animation: borderGlow 3s infinite ease-in-out;
-            margin: 20px;
-            overflow-y: auto;
-            max-height: 100%;
-        }
-
-        h1 {
-            color: var(--primary-dark);
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            font-weight: 600;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-
-        .input-group:hover {
-            transform: translateX(5px);
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent-color);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid;
+        .card {
+            background-color: var(--card-bg);
             border-radius: 10px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--primary-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            color: #333;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            animation: inputBorderRotate 3s linear infinite;
         }
 
-        .input-group input:focus {
-            outline: none;
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
-            background: rgba(255, 255, 255, 0.15);
-            animation: none;
-            border: 2px solid var(--accent-color);
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+            border-color: var(--accent-color);
         }
 
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            color: var(--primary-dark);
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .forgot-password {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
-        }
-
-        button {
-            background: var(--accent-color);
-            color: var(--light-text);
-            padding: 15px;
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
-        button:hover {
-            background: var(--accent-hover);
+        .btn:hover {
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .step {
@@ -398,397 +150,530 @@
 
         .step.active {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px 12px 40px;
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.1);
+        .step h3 {
+            margin-bottom: 1.5rem;
             color: var(--primary-dark);
-            transition: all 0.3s ease;
-            animation: inputBorderRotate 3s linear infinite;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
-            animation: none;
-        }
-
-        .form-control::placeholder {
-            color: var(--medium-gray);
-        }
-
-        .form-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent-color);
-            font-size: 16px;
-        }
-
-        select.form-control {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-
-        .toggle-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .toggle-btn {
-            background: none;
-            border: 2px solid var(--accent-color);
-            padding: 10px 20px;
-            color: var(--primary-dark);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-btn:first-child {
-            border-radius: 10px 0 0 10px;
-        }
-
-        .toggle-btn:last-child {
-            border-radius: 0 10px 10px 0;
-        }
-
-        .toggle-btn.active {
-            background: var(--accent-color);
-            color: var(--light-text);
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--card-border);
-            border-radius: 50%;
-            margin: 0 8px;
-            transition: all 0.3s ease;
-        }
-
-        .step-dot.active {
-            background: var(--accent-color);
-            transform: scale(1.2);
-            box-shadow: 0 0 10px var(--accent-color);
+            font-weight: 600;
         }
 
         .btn-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 1.5rem;
         }
 
-        .btn {
-            background: var(--accent-color);
-            color: var(--light-text);
-            padding: 12px 30px;
+        /* Password strength indicator */
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            background: #ddd;
+            border-radius: 3px;
+        }
+
+        .strength-meter {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .weak {
+            background: #ff4444;
+            width: 33.33%;
+        }
+
+        .medium {
+            background: #ffbb33;
+            width: 66.66%;
+        }
+
+        .strong {
+            background: #00C851;
+            width: 100%;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Social media buttons */
+        .social-login {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
+            border-radius: 5px;
+            color: white;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
-        .btn:hover {
-            background: var(--accent-hover);
+        .google-btn {
+            background: #db4437;
+        }
+
+        .linkedin-btn {
+            background: #0077b5;
+        }
+
+        .social-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Mobile-only home icon */
-        .mobile-home-icon {
+        /* OTP input styling */
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2em;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 5px;
             display: none;
         }
-        
-        @media (max-width: 991px) {
-            .mobile-home-icon {
-                display: block;
-                margin-right: 15px;
+
+        /* Toast notification */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .toast {
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success {
+            background-color: #00C851;
+        }
+
+        .toast.error {
+            background-color: #ff4444;
+        }
+
+        .toast.info {
+            background-color: #33b5e5;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
             }
-            .mobile-home-icon i {
-                color: white;
-                font-size: 24px;
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .social-login {
+                flex-direction: column;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="/static/logo.jpg" alt="Mentoria Logo">
+            <a class="navbar-brand" href="#">
+                <img src="/static/logo.jpg" alt="Mentoria Institute Logo">
                 <div class="brand-text">
-                    <span>Mentoria</span>
-                    <span>Institute</span>
+                    Mentoria <span style="color: #3498db;">Institute</span>
+                    <span>Learn and Grow</span>
                 </div>
             </a>
-            <a href="https://powerpitch.co.in/" class="mobile-home-icon"><i class="fas fa-home"></i></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container1">
-        <div class="left-section">
-            <div class="logo-container">
-                <img src="/static/logo.jpg" alt="Logo">
-            </div>
-            <div class="welcome-text">
-                <h2>Welcome Back!</h2>
-                <p>We're glad to see you again. Please login to continue your journey with us.</p>
-            </div>
-        </div>
-        <div class="right-section">
-            <div class="video-container">
-                <video autoplay muted loop playsinline>
-                    <source src="/static/A1.mp4" type="video/mp4">
-                </video>
-            </div>  
-            <div class="registration-container">
-                <div class="step-indicator">
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
-                </div>
-                
-                <!-- Step 1 -->
-                <div class="step active" id="step1">
-                    <h3>Create Account</h3>
-                    <div class="form-group">
-                        <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" placeholder="Name" id="name">
-                    </div>
-                    <div class="form-group">
-                        <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" placeholder="Surname" id="surname">
-                    </div>
-                    <div class="form-group">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" class="form-control" placeholder="Email" id="email">
-                    </div>
-                    <div class="form-group" id="otpSection">
-                        <button class="btn w-100" id="getOtpBtn">Get OTP</button>
-                    </div>
-                    <div class="form-group d-none" id="verifyOtpSection">
-                        <i class="fas fa-key"></i>
-                        <input type="text" class="form-control mb-3" placeholder="Enter OTP" id="otp">
-                        <button class="btn w-100" id="verifyOtpBtn">Verify OTP</button>
-                    </div>
-                </div>
+    <div class="main-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h2 class="text-center mb-4">Registration</h2>
+                            <form id="registration-form">
+                                <div class="step step1 active" id="step1">
+                                    <h3>Create Account</h3>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                        <div class="error-message" id="emailError"></div>
+                                    </div>
+                                    <div class="social-login">
+                                        <button type="button" class="social-btn google-btn">
+                                            <i class="fab fa-google"></i>
+                                            Sign up with Google
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="otp-container" id="otpInputs" style="display: none;">
+                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                        </div>
+                                        <button type="button" class="btn w-100" id="getOtpBtn">
+                                            <span class="btn-text">Get OTP</span>
+                                            <div class="spinner"></div>
+                                        </button>
+                                    </div>
+                                </div>
 
-                <!-- Step 2 -->
-                <div class="step" id="step2">
-                    <h3>Professional Details</h3>
-                    <div class="toggle-container">
-                        <button class="toggle-btn active" id="studentBtn">Student</button>
-                        <button class="toggle-btn" id="professionalBtn">Working Professional</button>
-                    </div>
-                    
-                    <!-- Student Form -->
-                    <div id="studentForm">
-                        <div class="form-group">
-                            <i class="fas fa-phone"></i>
-                            <input type="tel" class="form-control" placeholder="Mobile Number" id="studentMobile">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-venus-mars"></i>
-                            <select class="form-control" id="studentGender">
-                                <option value="">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-university"></i>
-                            <input type="text" class="form-control" placeholder="College Name" id="college">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-calendar"></i>
-                            <input type="text" class="form-control" placeholder="Year" id="year">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-book"></i>
-                            <input type="text" class="form-control" placeholder="Branch" id="branch">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input type="text" class="form-control" placeholder="Location" id="studentLocation">
-                        </div>
-                    </div>
+                                <div class="step" id="step2">
+                                    <h3>Personal Information</h3>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                                        <div class="error-message" id="nameError"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required>
+                                        <div class="error-message" id="phoneError"></div>
+                                    </div>
+                                    <div class="btn-container">
+                                        <button type="button" class="btn" id="prevBtn1">Previous</button>
+                                        <button type="button" class="btn" id="step2NextBtn">Next</button>
+                                    </div>
+                                </div>
 
-                    <!-- Professional Form -->
-                    <div id="professionalForm" style="display: none;">
-                        <div class="form-group">
-                            <i class="fas fa-phone"></i>
-                            <input type="tel" class="form-control" placeholder="Mobile Number" id="profMobile">
+                                <div class="step" id="step3">
+                                    <h3>Set Password</h3>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                        <div class="password-strength">
+                                            <div class="strength-meter"></div>
+                                        </div>
+                                        <div class="error-message" id="passwordError"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                                        <div class="error-message" id="confirmPasswordError"></div>
+                                    </div>
+                                    <div class="btn-container">
+                                        <button type="button" class="btn" id="prevBtn2">Previous</button>
+                                        <button type="button" class="btn" id="signupBtn">Sign Up</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <i class="fas fa-venus-mars"></i>
-                            <select class="form-control" id="profGender">
-                                <option value="">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-building"></i>
-                            <input type="text" class="form-control" placeholder="Organization" id="organization">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-briefcase"></i>
-                            <input type="text" class="form-control" placeholder="Designation" id="designation">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input type="text" class="form-control" placeholder="Location" id="profLocation">
-                        </div>
-                    </div>
-
-                    <div class="btn-container">
-                        <button class="btn" id="step2NextBtn">Next</button>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="step" id="step3">
-                    <h3>Set Password</h3>
-                    <div class="form-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" class="form-control" placeholder="Password" id="password">
-                    </div>
-                    <div class="form-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword">
-                    </div>
-                    <div class="btn-container">
-                        <button class="btn" id="prevBtn">Previous</button>
-                        <button class="btn" id="signupBtn">Sign Up</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Form submission handling
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your login logic here
-        });
-    </script>
+    <div class="toast-container"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const steps = document.querySelectorAll('.step');
-            const stepDots = document.querySelectorAll('.step-dot');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Step navigation
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
             const getOtpBtn = document.getElementById('getOtpBtn');
-            const verifyOtpSection = document.getElementById('verifyOtpSection');
-            const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-            const studentBtn = document.getElementById('studentBtn');
-            const professionalBtn = document.getElementById('professionalBtn');
-            const studentForm = document.getElementById('studentForm');
-            const professionalForm = document.getElementById('professionalForm');
             const step2NextBtn = document.getElementById('step2NextBtn');
-            const prevBtn = document.getElementById('prevBtn');
+            const prevBtn1 = document.getElementById('prevBtn1');
+            const prevBtn2 = document.getElementById('prevBtn2');
             const signupBtn = document.getElementById('signupBtn');
+            const otpInputs = document.getElementById('otpInputs');
 
-            let currentStep = 1;
-
-            // OTP Functionality
             getOtpBtn.addEventListener('click', function() {
+                const email = document.getElementById('email').value;
+                const emailError = document.getElementById('emailError');
+                
+                // Simple email validation
+                if (!validateEmail(email)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                    return;
+                }
+                
+                emailError.style.display = 'none';
+                
+                // Show spinner
+                this.disabled = true;
+                this.querySelector('.spinner').style.display = 'inline-block';
+                this.querySelector('.btn-text').textContent = 'Sending OTP...';
+                
                 // Simulate OTP sending
-                alert('OTP sent to your email!');
-                verifyOtpSection.classList.remove('d-none');
-                getOtpBtn.style.display = 'none'; // Hide the Get OTP button
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.querySelector('.spinner').style.display = 'none';
+                    this.querySelector('.btn-text').textContent = 'Verify OTP';
+                    otpInputs.style.display = 'flex';
+                    
+                    // Change button function to verify OTP
+                    this.removeEventListener('click', arguments.callee);
+                    this.addEventListener('click', verifyOtp);
+                    
+                    showToast('OTP sent to your email!', 'success');
+                }, 1500);
+            });
+            
+            function verifyOtp() {
+                // Get OTP values
+                const otpValues = Array.from(document.querySelectorAll('.otp-input')).map(input => input.value).join('');
+                
+                if (otpValues.length !== 4) {
+                    showToast('Please enter the 4-digit OTP', 'error');
+                    return;
+                }
+                
+                // Show spinner
+                this.disabled = true;
+                this.querySelector('.spinner').style.display = 'inline-block';
+                this.querySelector('.btn-text').textContent = 'Verifying...';
+                
+                // Simulate verification
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.querySelector('.spinner').style.display = 'none';
+                    showToast('OTP verified successfully!', 'success');
+                    
+                    // Go to step 2
+                    step1.classList.remove('active');
+                    step2.classList.add('active');
+                }, 1500);
+            }
+            
+            step2NextBtn.addEventListener('click', function() {
+                const fullName = document.getElementById('fullName').value;
+                const phone = document.getElementById('phone').value;
+                const nameError = document.getElementById('nameError');
+                const phoneError = document.getElementById('phoneError');
+                
+                let hasError = false;
+                
+                if (!fullName) {
+                    nameError.textContent = 'Please enter your full name';
+                    nameError.style.display = 'block';
+                    hasError = true;
+                } else {
+                    nameError.style.display = 'none';
+                }
+                
+                if (!phone) {
+                    phoneError.textContent = 'Please enter your phone number';
+                    phoneError.style.display = 'block';
+                    hasError = true;
+                } else {
+                    phoneError.style.display = 'none';
+                }
+                
+                if (!hasError) {
+                    step2.classList.remove('active');
+                    step3.classList.add('active');
+                }
+            });
+            
+            prevBtn1.addEventListener('click', function() {
+                step2.classList.remove('active');
+                step1.classList.add('active');
+            });
+            
+            prevBtn2.addEventListener('click', function() {
+                step3.classList.remove('active');
+                step2.classList.add('active');
             });
 
-            verifyOtpBtn.addEventListener('click', function() {
-                const otp = document.getElementById('otp').value;
-                if (otp) {
-                    // Simulate OTP verification
-                    alert('OTP verified successfully!');
-                    goToStep(2);
+            // Password strength indicator
+            const passwordInput = document.getElementById('password');
+            const strengthMeter = document.querySelector('.strength-meter');
+
+            passwordInput.addEventListener('input', function () {
+                const strength = validatePassword(this.value);
+                strengthMeter.className = 'strength-meter ' + strength;
+            });
+
+            // OTP input handling
+            const otpInputFields = document.querySelectorAll('.otp-input');
+
+            otpInputFields.forEach((input, index) => {
+                input.addEventListener('input', function () {
+                    if (this.value.length === 1) {
+                        if (index < otpInputFields.length - 1) otpInputFields[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Backspace' && !this.value) {
+                        if (index > 0) otpInputFields[index - 1].focus();
+                    }
+                });
+            });
+
+            // Form submission with validation
+            signupBtn.addEventListener('click', async function (e) {
+                e.preventDefault();
+
+                // Reset error messages
+                document.querySelectorAll('.error-message').forEach(err => err.style.display = 'none');
+
+                let hasError = false;
+
+                // Password validation
+                const password = passwordInput.value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const passwordError = document.getElementById('passwordError');
+                const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+                if (validatePassword(password) === 'weak') {
+                    passwordError.textContent = 'Password must be at least 8 characters long';
+                    passwordError.style.display = 'block';
+                    hasError = true;
                 } else {
-                    alert('Please enter OTP');
+                    passwordError.style.display = 'none';
+                }
+
+                if (password !== confirmPassword) {
+                    confirmPasswordError.textContent = 'Passwords do not match';
+                    confirmPasswordError.style.display = 'block';
+                    hasError = true;
+                } else {
+                    confirmPasswordError.style.display = 'none';
+                }
+
+                if (!hasError) {
+                    // Show loading state
+                    this.disabled = true;
+                    const btnText = this.textContent;
+                    this.innerHTML = '<div class="spinner" style="display:inline-block"></div> Processing...';
+
+                    try {
+                        // Simulate API call
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        showToast('Registration successful!', 'success');
+                        
+                        // Reset form
+                        document.getElementById('registration-form').reset();
+                        
+                        // Back to step 1
+                        step3.classList.remove('active');
+                        step1.classList.add('active');
+                        
+                        // Reset OTP section
+                        otpInputs.style.display = 'none';
+                        getOtpBtn.querySelector('.btn-text').textContent = 'Get OTP';
+                        getOtpBtn.removeEventListener('click', verifyOtp);
+                        getOtpBtn.addEventListener('click', arguments.callee);
+                        
+                    } catch (error) {
+                        showToast('Registration failed. Please try again.', 'error');
+                    } finally {
+                        this.disabled = false;
+                        this.innerHTML = btnText;
+                    }
                 }
             });
 
-            // Toggle between Student and Professional
-            studentBtn.addEventListener('click', function() {
-                studentBtn.classList.add('active');
-                professionalBtn.classList.remove('active');
-                studentForm.style.display = 'block';
-                professionalForm.style.display = 'none';
+            // Social media login handlers
+            document.querySelector('.google-btn').addEventListener('click', function () {
+                showToast('Google sign-in coming soon!', 'info');
             });
 
-            professionalBtn.addEventListener('click', function() {
-                professionalBtn.classList.add('active');
-                studentBtn.classList.remove('active');
-                professionalForm.style.display = 'block';
-                studentForm.style.display = 'none';
-            });
-
-            // Navigation buttons
-            step2NextBtn.addEventListener('click', function() {
-                goToStep(3);
-            });
-
-            prevBtn.addEventListener('click', function() {
-                goToStep(2);
-            });
-
-            signupBtn.addEventListener('click', function() {
-                // Add your signup logic here
-                alert('Registration successful!');
-            });
-
-            function goToStep(step) {
-                steps.forEach((s, index) => {
-                    if (index + 1 === step) {
-                        s.classList.add('active');
-                        stepDots[index].classList.add('active');
-                    } else {
-                        s.classList.remove('active');
-                        stepDots[index].classList.remove('active');
-                    }
-                });
-                currentStep = step;
+            // Helper functions
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
             }
+
+            function validatePassword(password) {
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumbers = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*]/.test(password);
+                const isLongEnough = password.length >= 8;
+
+                if (!isLongEnough) return 'weak';
+                if (hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar) return 'strong';
+                return 'medium';
+            }
+
+            // Toast notification
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                document.querySelector('.toast-container').appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+            }log
         });
     </script>
 </body>

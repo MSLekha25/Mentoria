@@ -15,5 +15,5 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
-def contact2(request):
+def forgot_password(request):
     return render(request, 'contact.html')
