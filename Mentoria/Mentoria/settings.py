@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mentoria_db',
-        'USER': 'root',
-        'PASSWORD': 'Mani@2004',  # Change this to a secure password
-        'HOST': 'localhost',
+        'USER': 'admin',
+        'PASSWORD': 'Dino033!',  # Change this to a secure password
+        'HOST': 'mentoria.cn42esc2owye.eu-north-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
