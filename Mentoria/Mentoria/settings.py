@@ -76,8 +76,15 @@ WSGI_APPLICATION = 'Mentoria.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mentoria_db',
+        'USER': 'root',
+        'PASSWORD': 'Mani@2004',  # Change this to a secure password
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -100,6 +107,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom User model
+AUTH_USER_MODEL = 'website.User'
+
+# Email settings for OTP verification
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Change this to your email provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mkgandhioff@gmail.com'  # Change this to your email
+EMAIL_HOST_PASSWORD = 'dsdf oswj umsk ysgn'  # Use app password for Gmail
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

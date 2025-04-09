@@ -112,15 +112,17 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 10px;
             position: relative;
         }
 
         .form-control {
-            padding: 0.75rem 1rem;
+            height: 45px;
+            padding: 10px 16px;
             border-radius: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+            box-shadow: none;
+            transition: all 0.3s;
         }
 
         .form-control:focus {
@@ -235,7 +237,41 @@
         }
 
         .google-btn {
-            background: #db4437;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background-color: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 24px;
+            height: 44px;
+            padding: 0 15px;
+            color: #3c4043;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .google-btn:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .google-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4);
+        }
+        
+        .google-text {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .google-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .linkedin-btn {
@@ -243,6 +279,25 @@
         }
 
         .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-icon-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .google-icon-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -391,6 +446,131 @@
                 font-size: 1rem;
             }
         }
+        
+        /* Form check styling */
+        .form-check-label {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* User type selection */
+        .user-type-selection {
+            text-align: center;
+        }
+        
+        .btn-user-type {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            background-color: transparent;
+            color: var(--accent-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-user-type.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-user-type:hover:not(.active) {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Form select styling */
+        .form-select {
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            color: #495057;
+        }
+        
+        .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        /* Form step styling */
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        /* Progress indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 15px;
+            position: relative;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .progress-step.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .progress-step.completed {
+            background-color: #00C851;
+            color: white;
+        }
+        
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            width: 15px;
+            height: 2px;
+            background-color: #e9ecef;
+            transform: translateY(-50%);
+        }
+        
+        .progress-step:first-child::before {
+            display: none;
+        }
+        
+        .progress-step.active::before,
+        .progress-step.completed::before {
+            background-color: var(--accent-color);
+        }
+        
+        /* Reduce form size with more compact spacing */
+        .auth-card {
+            padding: 20px;
+            max-width: 400px;
+        }
+        
+        /* Smaller margins between form elements */
+        .mb-3 {
+            margin-bottom: 0.75rem !important;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem !important;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -448,69 +628,241 @@
                 <div class="col-lg-6">
                     <div class="card shadow">
                         <div class="card-body">
-                            <h2 class="text-center mb-4">Registration</h2>
+                            <h2 class="text-center mb-4">Sign Up</h2>
+                            
+                            <!-- Registration Form Steps -->
                             <form id="registration-form">
-                                <div class="step step1 active" id="step1">
-                                    <h3>Create Account</h3>
-                                    <div class="form-group">
+                                <!-- Step 1: Email -->
+                                <div class="form-step active" id="step1">
+                                    <!-- Google Sign Up Button -->
+                                    <div class="mb-3">
+                                        <button type="button" class="google-btn w-100">
+                                            <span class="google-text">Google</span>
+                                            <span class="google-icon">
+                                                <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                                    <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+                                                    <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+                                                    <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
+                                                    <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Or Divider -->
+                                    <div class="divider mb-3">
+                                        <span>OR</span>
+                                    </div>
+                                    
+                                    <div class="form-group mb-3">
                                         <input type="email" class="form-control" id="email" placeholder="Email" required>
                                         <div class="error-message" id="emailError"></div>
                                     </div>
-                                    <div class="social-login">
-                                        <button type="button" class="social-btn google-btn">
-                                            <i class="fab fa-google"></i>
-                                            Sign up with Google
-                                        </button>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="otp-container" id="otpInputs" style="display: none;">
-                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    
+                                    <button type="button" class="btn w-100 next-btn" id="step1NextBtn" data-next="step2">Continue</button>
+                                </div>
+                                
+                                <!-- Step 2: Personal Information -->
+                                <div class="form-step" id="step2">
+                                    <h3 class="text-center mb-3">Personal Information</h3>
+                                    
+                                    <!-- User Type Selection -->
+                                    <div class="user-type-selection mb-3">
+                                        <p class="text-center mb-2">I am a:</p>
+                                        <div class="d-flex justify-content-center gap-3">
+                                            <button type="button" id="studentTypeBtn" class="btn-user-type active">Student</button>
+                                            <button type="button" id="professionalTypeBtn" class="btn-user-type">Working Professional</button>
                                         </div>
-                                        <button type="button" class="btn w-100" id="getOtpBtn">
-                                            <span class="btn-text">Get OTP</span>
-                                            <div class="spinner"></div>
-                                        </button>
+                                    </div>
+                                    
+                                    <!-- Student Fields -->
+                                    <div id="student-fields">
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="student-first-name" placeholder="First Name" required>
+                                            <div class="error-message" id="studentFirstNameError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="student-last-name" placeholder="Last Name" required>
+                                            <div class="error-message" id="studentLastNameError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="tel" class="form-control" id="student-mobile" placeholder="Mobile Number" required>
+                                            <div class="error-message" id="studentMobileError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <select class="form-select" id="student-gender" required>
+                                                <option value="" selected disabled>Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <div class="error-message" id="studentGenderError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="college-name" placeholder="College Name" required>
+                                            <div class="error-message" id="collegeNameError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <select class="form-select" id="year" required>
+                                                <option value="" selected disabled>Select Year</option>
+                                                <option value="1">1st Year</option>
+                                                <option value="2">2nd Year</option>
+                                                <option value="3">3rd Year</option>
+                                                <option value="4">4th Year</option>
+                                                <option value="5">5th Year</option>
+                                            </select>
+                                            <div class="error-message" id="yearError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="branch" placeholder="Branch" required>
+                                            <div class="error-message" id="branchError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="student-location" placeholder="Location" required>
+                                            <div class="error-message" id="studentLocationError"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Professional Fields -->
+                                    <div id="professional-fields" style="display: none;">
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="professional-first-name" placeholder="First Name" required>
+                                            <div class="error-message" id="professionalFirstNameError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="professional-last-name" placeholder="Last Name" required>
+                                            <div class="error-message" id="professionalLastNameError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="tel" class="form-control" id="professional-mobile" placeholder="Mobile Number" required>
+                                            <div class="error-message" id="professionalMobileError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <select class="form-select" id="professional-gender" required>
+                                                <option value="" selected disabled>Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <div class="error-message" id="professionalGenderError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="organization" placeholder="Organization" required>
+                                            <div class="error-message" id="organizationError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="designation" placeholder="Designation" required>
+                                            <div class="error-message" id="designationError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" id="professional-location" placeholder="Location" required>
+                                            <div class="error-message" id="professionalLocationError"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="btn-container d-flex gap-3 mt-3">
+                                        <button type="button" class="btn w-50 prev-btn" data-prev="step1">Previous</button>
+                                        <button type="button" class="btn w-50 next-btn" id="step2NextBtn" data-next="step3">Continue</button>
                                     </div>
                                 </div>
-
-                                <div class="step" id="step2">
-                                    <h3>Personal Information</h3>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
-                                        <div class="error-message" id="nameError"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required>
-                                        <div class="error-message" id="phoneError"></div>
-                                    </div>
-                                    <div class="btn-container">
-                                        <button type="button" class="btn" id="prevBtn1">Previous</button>
-                                        <button type="button" class="btn" id="step2NextBtn">Next</button>
-                                    </div>
-                                </div>
-
-                                <div class="step" id="step3">
-                                    <h3>Set Password</h3>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="password" placeholder="Password" required>
-                                        <div class="password-strength">
-                                            <div class="strength-meter"></div>
+                                
+                                <!-- Step 3: Password -->
+                                <div class="form-step" id="step3">
+                                    <h3 class="text-center mb-3">Set Password</h3>
+                                    
+                                    <!-- Student Password Fields -->
+                                    <div id="student-password-fields">
+                                        <div class="form-group mb-2">
+                                            <input type="password" class="form-control" id="student-password" placeholder="Password" required>
+                                            <div class="password-strength">
+                                                <div class="strength-meter" id="student-strength-meter"></div>
+                                            </div>
+                                            <div class="error-message" id="studentPasswordError"></div>
                                         </div>
-                                        <div class="error-message" id="passwordError"></div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="password" class="form-control" id="student-confirm-password" placeholder="Confirm Password" required>
+                                            <div class="error-message" id="studentConfirmPasswordError"></div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
-                                        <div class="error-message" id="confirmPasswordError"></div>
+                                    
+                                    <!-- Professional Password Fields -->
+                                    <div id="professional-password-fields" style="display: none;">
+                                        <div class="form-group mb-2">
+                                            <input type="password" class="form-control" id="professional-password" placeholder="Password" required>
+                                            <div class="password-strength">
+                                                <div class="strength-meter" id="professional-strength-meter"></div>
+                                            </div>
+                                            <div class="error-message" id="professionalPasswordError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-2">
+                                            <input type="password" class="form-control" id="professional-confirm-password" placeholder="Confirm Password" required>
+                                            <div class="error-message" id="professionalConfirmPasswordError"></div>
+                                        </div>
                                     </div>
-                                    <div class="btn-container">
-                                        <button type="button" class="btn" id="prevBtn2">Previous</button>
-                                        <button type="button" class="btn" id="signupBtn">Sign Up</button>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Email me with news and updates
+                                        </label>
                                     </div>
+                                    
+                                    <div class="btn-container d-flex gap-3">
+                                        <button type="button" class="btn w-50 prev-btn" data-prev="step2">Previous</button>
+                                        <button type="submit" class="btn w-50" id="signupBtn">Sign Up</button>
+                                    </div>
+                                    
+                                    <div class="terms-text text-center mt-3">
+                                        <small>
+                                            By signing up you agree to our <a href="#">Terms of Service</a>
+                                            and <a href="#">Privacy Policy</a>
+                                        </small>
+                                    </div>
+                                    
+                                    <p class="text-center mt-3">
+                                        Already have an account? <a href="{% url 'login' %}">Log in</a>
+                                    </p>
                                 </div>
                             </form>
+                            
+                            <!-- OTP Verification (initially hidden) -->
+                            <div id="otpVerification" style="display: none;">
+                                <h3 class="text-center mb-3">Verify your email</h3>
+                                <p class="text-center mb-4">We've sent a 6-digit verification code to your email</p>
+                                
+                                <div class="otp-container mb-4">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                                </div>
+                                
+                                <button type="button" class="btn w-100" id="verifyOtpBtn">
+                                    <span class="btn-text">Verify</span>
+                                    <div class="spinner"></div>
+                                </button>
+                                
+                                <div class="text-center mt-3">
+                                    <p>Didn't receive the code? <a href="#" id="resendOtp">Resend</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -523,21 +875,367 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Step navigation
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-            const getOtpBtn = document.getElementById('getOtpBtn');
-            const step2NextBtn = document.getElementById('step2NextBtn');
-            const prevBtn1 = document.getElementById('prevBtn1');
-            const prevBtn2 = document.getElementById('prevBtn2');
+            const formSteps = document.querySelectorAll('.form-step');
+            const nextButtons = document.querySelectorAll('.next-btn');
+            const prevButtons = document.querySelectorAll('.prev-btn');
+            
+            // Next button click
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = this.closest('.form-step');
+                    const nextStepId = this.getAttribute('data-next');
+                    const nextStep = document.getElementById(nextStepId);
+                    
+                    // Basic validation before proceeding
+                    if (validateStep(currentStep)) {
+                        currentStep.classList.remove('active');
+                        nextStep.classList.add('active');
+                    }
+                });
+            });
+            
+            // Previous button click
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = this.closest('.form-step');
+                    const prevStepId = this.getAttribute('data-prev');
+                    const prevStep = document.getElementById(prevStepId);
+                    
+                    currentStep.classList.remove('active');
+                    prevStep.classList.add('active');
+                });
+            });
+            
+            // Validate step before proceeding
+            function validateStep(step) {
+                let valid = true;
+                const inputs = step.querySelectorAll('input[required], select[required]');
+                const errorMessages = step.querySelectorAll('.error-message');
+                
+                // Reset error messages
+                errorMessages.forEach(err => err.style.display = 'none');
+                
+                // Check required fields
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        const fieldName = input.placeholder || input.id;
+                        const errorId = input.id + 'Error';
+                        const errorElement = document.getElementById(errorId);
+                        
+                        if (errorElement) {
+                            errorElement.textContent = `Please enter your ${fieldName}`;
+                            errorElement.style.display = 'block';
+                            valid = false;
+                        }
+                    }
+                });
+                
+                // Special case for email validation in step 1
+                if (step.id === 'step1') {
+                    const email = document.getElementById('email').value;
+                    if (email && !validateEmail(email)) {
+                        document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                        document.getElementById('emailError').style.display = 'block';
+                        valid = false;
+                    }
+                }
+                
+                return valid;
+            }
+            
+            // User Type Selection
+            const studentTypeBtn = document.getElementById('studentTypeBtn');
+            const professionalTypeBtn = document.getElementById('professionalTypeBtn');
+            const studentFields = document.getElementById('student-fields');
+            const professionalFields = document.getElementById('professional-fields');
+            const studentPasswordFields = document.getElementById('student-password-fields');
+            const professionalPasswordFields = document.getElementById('professional-password-fields');
+            
+            let currentUserType = 'student';
+            
+            // User type toggle
+            studentTypeBtn.addEventListener('click', function() {
+                studentTypeBtn.classList.add('active');
+                professionalTypeBtn.classList.remove('active');
+                studentFields.style.display = 'block';
+                professionalFields.style.display = 'none';
+                studentPasswordFields.style.display = 'block';
+                professionalPasswordFields.style.display = 'none';
+                currentUserType = 'student';
+            });
+            
+            professionalTypeBtn.addEventListener('click', function() {
+                professionalTypeBtn.classList.add('active');
+                studentTypeBtn.classList.remove('active');
+                professionalFields.style.display = 'block';
+                studentFields.style.display = 'none';
+                professionalPasswordFields.style.display = 'block';
+                studentPasswordFields.style.display = 'none';
+                currentUserType = 'professional';
+            });
+            
+            // Password strength indicator
+            const studentPasswordInput = document.getElementById('student-password');
+            const professionalPasswordInput = document.getElementById('professional-password');
+            const studentStrengthMeter = document.getElementById('student-strength-meter');
+            const professionalStrengthMeter = document.getElementById('professional-strength-meter');
+            
+            studentPasswordInput.addEventListener('input', function () {
+                const strength = validatePassword(this.value);
+                studentStrengthMeter.className = 'strength-meter ' + strength;
+            });
+            
+            professionalPasswordInput.addEventListener('input', function () {
+                const strength = validatePassword(this.value);
+                professionalStrengthMeter.className = 'strength-meter ' + strength;
+            });
+            
+            // Form submission
             const signupBtn = document.getElementById('signupBtn');
-            const otpInputs = document.getElementById('otpInputs');
-
-            getOtpBtn.addEventListener('click', function() {
+            
+            signupBtn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                // Validate final step
+                if (!validateFinalStep()) {
+                    return;
+                }
+                
+                // Show loading state
+                this.disabled = true;
+                const btnText = this.textContent;
+                this.innerHTML = '<div class="spinner" style="display:inline-block"></div> Processing...';
+                
+                try {
+                    // Gather form data based on user type
+                    const email = document.getElementById('email').value;
+                    const newsletter = document.getElementById('newsletter').checked;
+                    let userData = {
+                        email: email,
+                        newsletter: newsletter,
+                        user_type: currentUserType
+                    };
+                    
+                    if (currentUserType === 'student') {
+                        userData = {
+                            ...userData,
+                            first_name: document.getElementById('student-first-name').value,
+                            last_name: document.getElementById('student-last-name').value,
+                            mobile: document.getElementById('student-mobile').value,
+                            gender: document.getElementById('student-gender').value,
+                            college_name: document.getElementById('college-name').value,
+                            year: document.getElementById('year').value,
+                            branch: document.getElementById('branch').value,
+                            location: document.getElementById('student-location').value,
+                            password: document.getElementById('student-password').value
+                        };
+                    } else {
+                        userData = {
+                            ...userData,
+                            first_name: document.getElementById('professional-first-name').value,
+                            last_name: document.getElementById('professional-last-name').value,
+                            mobile: document.getElementById('professional-mobile').value,
+                            gender: document.getElementById('professional-gender').value,
+                            organization: document.getElementById('organization').value,
+                            designation: document.getElementById('designation').value,
+                            location: document.getElementById('professional-location').value,
+                            password: document.getElementById('professional-password').value
+                        };
+                    }
+                    
+                    // Send registration request
+                    const response = await fetch('/api/register/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Store user ID for OTP verification
+                        sessionStorage.setItem('user_id', data.user_id);
+                        
+                        // Hide registration form and show OTP verification
+                        document.getElementById('registration-form').style.display = 'none';
+                        document.getElementById('otpVerification').style.display = 'block';
+                        
+                        showToast('Verification code sent to your email', 'success');
+                    } else {
+                        showToast(data.message, 'error');
+                    }
+                } catch (error) {
+                    showToast('An error occurred. Please try again.', 'error');
+                    console.error('Error:', error);
+                } finally {
+                    this.disabled = false;
+                    this.innerHTML = btnText;
+                }
+            });
+            
+            // OTP input handling
+            const otpInputFields = document.querySelectorAll('.otp-input');
+            
+            otpInputFields.forEach((input, index) => {
+                input.addEventListener('input', function () {
+                    if (this.value.length === 1) {
+                        if (index < otpInputFields.length - 1) {
+                            otpInputFields[index + 1].focus();
+                        }
+                        
+                        // Check if all OTP fields are filled
+                        if (Array.from(otpInputFields).every(field => field.value.length === 1)) {
+                            verifyOtpBtn.focus();
+                        }
+                    }
+                });
+                
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Backspace' && !this.value) {
+                        if (index > 0) {
+                            otpInputFields[index - 1].focus();
+                        }
+                    }
+                });
+            });
+            
+            // OTP verification
+            verifyOtpBtn.addEventListener('click', async function() {
+                // Get OTP from input fields
+                const otpValues = Array.from(otpInputFields).map(input => input.value).join('');
+                
+                if (otpValues.length !== 6) {
+                    showToast('Please enter the 6-digit OTP', 'error');
+                    return;
+                }
+                
+                // Get user ID from session storage
+                const userId = sessionStorage.getItem('user_id');
+                
+                if (!userId) {
+                    showToast('Session expired. Please register again.', 'error');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                    return;
+                }
+                
+                // Show loading
+                this.disabled = true;
+                const btnText = this.querySelector('.btn-text').textContent;
+                this.querySelector('.spinner').style.display = 'inline-block';
+                this.querySelector('.btn-text').textContent = 'Verifying...';
+                
+                try {
+                    const response = await fetch('/api/verify-otp/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            user_id: userId,
+                            otp_code: otpValues
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showToast('Email verified successfully!', 'success');
+                        
+                        // Clear session storage
+                        sessionStorage.removeItem('user_id');
+                        
+                        // Redirect to login page after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = '/login/';
+                        }, 2000);
+                    } else {
+                        showToast(data.message, 'error');
+                    }
+                } catch (error) {
+                    showToast('An error occurred. Please try again.', 'error');
+                    console.error('Error:', error);
+                } finally {
+                    this.disabled = false;
+                    this.querySelector('.spinner').style.display = 'none';
+                    this.querySelector('.btn-text').textContent = btnText;
+                }
+            });
+            
+            // Resend OTP
+            resendOtp.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                // Get user ID from session storage
+                const userId = sessionStorage.getItem('user_id');
+                
+                if (!userId) {
+                    showToast('Session expired. Please register again.', 'error');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                    return;
+                }
+                
+                // Disable link
+                this.style.pointerEvents = 'none';
+                const originalText = this.textContent;
+                this.textContent = 'Sending...';
+                
+                try {
+                    const response = await fetch('/api/resend-otp/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            user_id: userId
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showToast('OTP resent successfully!', 'success');
+                        
+                        // Clear OTP fields
+                        otpInputFields.forEach(input => {
+                            input.value = '';
+                        });
+                        otpInputFields[0].focus();
+                    } else {
+                        showToast(data.message, 'error');
+                    }
+                } catch (error) {
+                    showToast('An error occurred. Please try again.', 'error');
+                    console.error('Error:', error);
+                } finally {
+                    // Re-enable link after 30 seconds (prevent spam)
+                    setTimeout(() => {
+                        this.style.pointerEvents = 'auto';
+                        this.textContent = originalText;
+                    }, 30000);
+                }
+            });
+            
+            // Fix the step 1 next button
+            document.getElementById('step1NextBtn').addEventListener('click', function() {
+                const currentStep = document.getElementById('step1');
+                const nextStep = document.getElementById('step2');
+                
+                // Validate email before proceeding
                 const email = document.getElementById('email').value;
                 const emailError = document.getElementById('emailError');
                 
-                // Simple email validation
+                if (!email) {
+                    emailError.textContent = 'Please enter your email address';
+                    emailError.style.display = 'block';
+                    return;
+                }
+                
                 if (!validateEmail(email)) {
                     emailError.textContent = 'Please enter a valid email address';
                     emailError.style.display = 'block';
@@ -545,188 +1243,184 @@
                 }
                 
                 emailError.style.display = 'none';
-                
-                // Show spinner
-                this.disabled = true;
-                this.querySelector('.spinner').style.display = 'inline-block';
-                this.querySelector('.btn-text').textContent = 'Sending OTP...';
-                
-                // Simulate OTP sending
-                setTimeout(() => {
-                    this.disabled = false;
-                    this.querySelector('.spinner').style.display = 'none';
-                    this.querySelector('.btn-text').textContent = 'Verify OTP';
-                    otpInputs.style.display = 'flex';
-                    
-                    // Change button function to verify OTP
-                    this.removeEventListener('click', arguments.callee);
-                    this.addEventListener('click', verifyOtp);
-                    
-                    showToast('OTP sent to your email!', 'success');
-                }, 1500);
+                currentStep.classList.remove('active');
+                nextStep.classList.add('active');
             });
             
-            function verifyOtp() {
-                // Get OTP values
-                const otpValues = Array.from(document.querySelectorAll('.otp-input')).map(input => input.value).join('');
+            // Fix the step 2 next button
+            document.getElementById('step2NextBtn').addEventListener('click', function() {
+                const currentStep = document.getElementById('step2');
+                const nextStep = document.getElementById('step3');
                 
-                if (otpValues.length !== 4) {
-                    showToast('Please enter the 4-digit OTP', 'error');
-                    return;
+                // Validate fields based on user type
+                let valid = true;
+                
+                if (currentUserType === 'student') {
+                    // Validate student fields
+                    const studentFirstName = document.getElementById('student-first-name').value;
+                    const studentLastName = document.getElementById('student-last-name').value;
+                    const studentMobile = document.getElementById('student-mobile').value;
+                    const studentGender = document.getElementById('student-gender').value;
+                    const collegeName = document.getElementById('college-name').value;
+                    const year = document.getElementById('year').value;
+                    const branch = document.getElementById('branch').value;
+                    const studentLocation = document.getElementById('student-location').value;
+                    
+                    // Reset error messages
+                    document.querySelectorAll('#student-fields .error-message').forEach(err => {
+                        err.style.display = 'none';
+                    });
+                    
+                    if (!studentFirstName) {
+                        document.getElementById('studentFirstNameError').textContent = 'Please enter your first name';
+                        document.getElementById('studentFirstNameError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!studentLastName) {
+                        document.getElementById('studentLastNameError').textContent = 'Please enter your last name';
+                        document.getElementById('studentLastNameError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!studentMobile) {
+                        document.getElementById('studentMobileError').textContent = 'Please enter your mobile number';
+                        document.getElementById('studentMobileError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!studentGender) {
+                        document.getElementById('studentGenderError').textContent = 'Please select your gender';
+                        document.getElementById('studentGenderError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!collegeName) {
+                        document.getElementById('collegeNameError').textContent = 'Please enter your college name';
+                        document.getElementById('collegeNameError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!year) {
+                        document.getElementById('yearError').textContent = 'Please select your year';
+                        document.getElementById('yearError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!branch) {
+                        document.getElementById('branchError').textContent = 'Please enter your branch';
+                        document.getElementById('branchError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!studentLocation) {
+                        document.getElementById('studentLocationError').textContent = 'Please enter your location';
+                        document.getElementById('studentLocationError').style.display = 'block';
+                        valid = false;
+                    }
+                } else {
+                    // Validate professional fields
+                    const professionalFirstName = document.getElementById('professional-first-name').value;
+                    const professionalLastName = document.getElementById('professional-last-name').value;
+                    const professionalMobile = document.getElementById('professional-mobile').value;
+                    const professionalGender = document.getElementById('professional-gender').value;
+                    const organization = document.getElementById('organization').value;
+                    const designation = document.getElementById('designation').value;
+                    const professionalLocation = document.getElementById('professional-location').value;
+                    
+                    // Reset error messages
+                    document.querySelectorAll('#professional-fields .error-message').forEach(err => {
+                        err.style.display = 'none';
+                    });
+                    
+                    if (!professionalFirstName) {
+                        document.getElementById('professionalFirstNameError').textContent = 'Please enter your first name';
+                        document.getElementById('professionalFirstNameError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!professionalLastName) {
+                        document.getElementById('professionalLastNameError').textContent = 'Please enter your last name';
+                        document.getElementById('professionalLastNameError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!professionalMobile) {
+                        document.getElementById('professionalMobileError').textContent = 'Please enter your mobile number';
+                        document.getElementById('professionalMobileError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!professionalGender) {
+                        document.getElementById('professionalGenderError').textContent = 'Please select your gender';
+                        document.getElementById('professionalGenderError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!organization) {
+                        document.getElementById('organizationError').textContent = 'Please enter your organization';
+                        document.getElementById('organizationError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!designation) {
+                        document.getElementById('designationError').textContent = 'Please enter your designation';
+                        document.getElementById('designationError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (!professionalLocation) {
+                        document.getElementById('professionalLocationError').textContent = 'Please enter your location';
+                        document.getElementById('professionalLocationError').style.display = 'block';
+                        valid = false;
+                    }
                 }
                 
-                // Show spinner
-                this.disabled = true;
-                this.querySelector('.spinner').style.display = 'inline-block';
-                this.querySelector('.btn-text').textContent = 'Verifying...';
+                if (valid) {
+                    currentStep.classList.remove('active');
+                    nextStep.classList.add('active');
+                }
+            });
+            
+            // Final step validation
+            function validateFinalStep() {
+                let valid = true;
                 
-                // Simulate verification
-                setTimeout(() => {
-                    this.disabled = false;
-                    this.querySelector('.spinner').style.display = 'none';
-                    showToast('OTP verified successfully!', 'success');
+                if (currentUserType === 'student') {
+                    const password = studentPasswordInput.value;
+                    const confirmPassword = document.getElementById('student-confirm-password').value;
                     
-                    // Go to step 2
-                    step1.classList.remove('active');
-                    step2.classList.add('active');
-                }, 1500);
+                    if (validatePassword(password) === 'weak') {
+                        document.getElementById('studentPasswordError').textContent = 'Password must be at least 8 characters long';
+                        document.getElementById('studentPasswordError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        document.getElementById('studentConfirmPasswordError').textContent = 'Passwords do not match';
+                        document.getElementById('studentConfirmPasswordError').style.display = 'block';
+                        valid = false;
+                    }
+                } else {
+                    const password = professionalPasswordInput.value;
+                    const confirmPassword = document.getElementById('professional-confirm-password').value;
+                    
+                    if (validatePassword(password) === 'weak') {
+                        document.getElementById('professionalPasswordError').textContent = 'Password must be at least 8 characters long';
+                        document.getElementById('professionalPasswordError').style.display = 'block';
+                        valid = false;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        document.getElementById('professionalConfirmPasswordError').textContent = 'Passwords do not match';
+                        document.getElementById('professionalConfirmPasswordError').style.display = 'block';
+                        valid = false;
+                    }
+                }
+                
+                return valid;
             }
             
-            step2NextBtn.addEventListener('click', function() {
-                const fullName = document.getElementById('fullName').value;
-                const phone = document.getElementById('phone').value;
-                const nameError = document.getElementById('nameError');
-                const phoneError = document.getElementById('phoneError');
-                
-                let hasError = false;
-                
-                if (!fullName) {
-                    nameError.textContent = 'Please enter your full name';
-                    nameError.style.display = 'block';
-                    hasError = true;
-                } else {
-                    nameError.style.display = 'none';
-                }
-                
-                if (!phone) {
-                    phoneError.textContent = 'Please enter your phone number';
-                    phoneError.style.display = 'block';
-                    hasError = true;
-                } else {
-                    phoneError.style.display = 'none';
-                }
-                
-                if (!hasError) {
-                    step2.classList.remove('active');
-                    step3.classList.add('active');
-                }
-            });
-            
-            prevBtn1.addEventListener('click', function() {
-                step2.classList.remove('active');
-                step1.classList.add('active');
-            });
-            
-            prevBtn2.addEventListener('click', function() {
-                step3.classList.remove('active');
-                step2.classList.add('active');
-            });
-
-            // Password strength indicator
-            const passwordInput = document.getElementById('password');
-            const strengthMeter = document.querySelector('.strength-meter');
-
-            passwordInput.addEventListener('input', function () {
-                const strength = validatePassword(this.value);
-                strengthMeter.className = 'strength-meter ' + strength;
-            });
-
-            // OTP input handling
-            const otpInputFields = document.querySelectorAll('.otp-input');
-
-            otpInputFields.forEach((input, index) => {
-                input.addEventListener('input', function () {
-                    if (this.value.length === 1) {
-                        if (index < otpInputFields.length - 1) otpInputFields[index + 1].focus();
-                    }
-                });
-
-                input.addEventListener('keydown', function (e) {
-                    if (e.key === 'Backspace' && !this.value) {
-                        if (index > 0) otpInputFields[index - 1].focus();
-                    }
-                });
-            });
-
-            // Form submission with validation
-            signupBtn.addEventListener('click', async function (e) {
-                e.preventDefault();
-
-                // Reset error messages
-                document.querySelectorAll('.error-message').forEach(err => err.style.display = 'none');
-
-                let hasError = false;
-
-                // Password validation
-                const password = passwordInput.value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const passwordError = document.getElementById('passwordError');
-                const confirmPasswordError = document.getElementById('confirmPasswordError');
-
-                if (validatePassword(password) === 'weak') {
-                    passwordError.textContent = 'Password must be at least 8 characters long';
-                    passwordError.style.display = 'block';
-                    hasError = true;
-                } else {
-                    passwordError.style.display = 'none';
-                }
-
-                if (password !== confirmPassword) {
-                    confirmPasswordError.textContent = 'Passwords do not match';
-                    confirmPasswordError.style.display = 'block';
-                    hasError = true;
-                } else {
-                    confirmPasswordError.style.display = 'none';
-                }
-
-                if (!hasError) {
-                    // Show loading state
-                    this.disabled = true;
-                    const btnText = this.textContent;
-                    this.innerHTML = '<div class="spinner" style="display:inline-block"></div> Processing...';
-
-                    try {
-                        // Simulate API call
-                        await new Promise(resolve => setTimeout(resolve, 1500));
-                        showToast('Registration successful!', 'success');
-                        
-                        // Reset form
-                        document.getElementById('registration-form').reset();
-                        
-                        // Back to step 1
-                        step3.classList.remove('active');
-                        step1.classList.add('active');
-                        
-                        // Reset OTP section
-                        otpInputs.style.display = 'none';
-                        getOtpBtn.querySelector('.btn-text').textContent = 'Get OTP';
-                        getOtpBtn.removeEventListener('click', verifyOtp);
-                        getOtpBtn.addEventListener('click', arguments.callee);
-                        
-                    } catch (error) {
-                        showToast('Registration failed. Please try again.', 'error');
-                    } finally {
-                        this.disabled = false;
-                        this.innerHTML = btnText;
-                    }
-                }
-            });
-
-            // Social media login handlers
-            document.querySelector('.google-btn').addEventListener('click', function () {
-                showToast('Google sign-in coming soon!', 'info');
-            });
-
             // Helper functions
             function validateEmail(email) {
                 const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
