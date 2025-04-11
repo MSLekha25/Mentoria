@@ -342,6 +342,8 @@
             color: white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             animation: slideIn 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .toast.success {
@@ -354,6 +356,25 @@
 
         .toast.info {
             background-color: #33b5e5;
+        }
+
+        .toast-timer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 100%;
+            animation: toast-timer 5s linear forwards;
+        }
+
+        @keyframes toast-timer {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
         }
 
         @keyframes slideIn {
@@ -839,30 +860,6 @@
                                     </p>
                                 </div>
                             </form>
-                            
-                            <!-- OTP Verification (initially hidden) -->
-                            <div id="otpVerification" style="display: none;">
-                                <h3 class="text-center mb-3">Verify your email</h3>
-                                <p class="text-center mb-4">We've sent a 6-digit verification code to your email</p>
-                                
-                                <div class="otp-container mb-4">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
-                                </div>
-                                
-                                <button type="button" class="btn w-100" id="verifyOtpBtn">
-                                    <span class="btn-text">Verify</span>
-                                    <div class="spinner"></div>
-                                </button>
-                                
-                                <div class="text-center mt-3">
-                                    <p>Didn't receive the code? <a href="#" id="resendOtp">Resend</a></p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -933,9 +930,11 @@
                 // Special case for email validation in step 1
                 if (step.id === 'step1') {
                     const email = document.getElementById('email').value;
+                    const emailError = document.getElementById('emailError');
+                    
                     if (email && !validateEmail(email)) {
-                        document.getElementById('emailError').textContent = 'Please enter a valid email address';
-                        document.getElementById('emailError').style.display = 'block';
+                        emailError.textContent = 'Please enter a valid email address';
+                        emailError.style.display = 'block';
                         valid = false;
                     }
                 }
@@ -992,6 +991,7 @@
             
             // Form submission
             const signupBtn = document.getElementById('signupBtn');
+            const registrationForm = document.getElementById('registration-form');
             
             signupBtn.addEventListener('click', async function(e) {
                 e.preventDefault();
@@ -1043,6 +1043,8 @@
                         };
                     }
                     
+                    console.log('Sending registration data:', userData);
+                    
                     // Send registration request
                     const response = await fetch('/api/register/', {
                         method: 'POST',
@@ -1053,171 +1055,33 @@
                     });
                     
                     const data = await response.json();
+                    console.log('Registration API response:', data);
                     
                     if (data.success) {
-                        // Store user ID for OTP verification
-                        sessionStorage.setItem('user_id', data.user_id);
+                        // Show success message with our professional toast
+                        showToast('Registration successful! Redirecting to login...', 'success');
                         
-                        // Hide registration form and show OTP verification
-                        document.getElementById('registration-form').style.display = 'none';
-                        document.getElementById('otpVerification').style.display = 'block';
-                        
-                        showToast('Verification code sent to your email', 'success');
-                    } else {
-                        showToast(data.message, 'error');
-                    }
-                } catch (error) {
-                    showToast('An error occurred. Please try again.', 'error');
-                    console.error('Error:', error);
-                } finally {
-                    this.disabled = false;
-                    this.innerHTML = btnText;
-                }
-            });
-            
-            // OTP input handling
-            const otpInputFields = document.querySelectorAll('.otp-input');
-            
-            otpInputFields.forEach((input, index) => {
-                input.addEventListener('input', function () {
-                    if (this.value.length === 1) {
-                        if (index < otpInputFields.length - 1) {
-                            otpInputFields[index + 1].focus();
-                        }
-                        
-                        // Check if all OTP fields are filled
-                        if (Array.from(otpInputFields).every(field => field.value.length === 1)) {
-                            verifyOtpBtn.focus();
-                        }
-                    }
-                });
-                
-                input.addEventListener('keydown', function (e) {
-                    if (e.key === 'Backspace' && !this.value) {
-                        if (index > 0) {
-                            otpInputFields[index - 1].focus();
-                        }
-                    }
-                });
-            });
-            
-            // OTP verification
-            verifyOtpBtn.addEventListener('click', async function() {
-                // Get OTP from input fields
-                const otpValues = Array.from(otpInputFields).map(input => input.value).join('');
-                
-                if (otpValues.length !== 6) {
-                    showToast('Please enter the 6-digit OTP', 'error');
-                    return;
-                }
-                
-                // Get user ID from session storage
-                const userId = sessionStorage.getItem('user_id');
-                
-                if (!userId) {
-                    showToast('Session expired. Please register again.', 'error');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                    return;
-                }
-                
-                // Show loading
-                this.disabled = true;
-                const btnText = this.querySelector('.btn-text').textContent;
-                this.querySelector('.spinner').style.display = 'inline-block';
-                this.querySelector('.btn-text').textContent = 'Verifying...';
-                
-                try {
-                    const response = await fetch('/api/verify-otp/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            user_id: userId,
-                            otp_code: otpValues
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        showToast('Email verified successfully!', 'success');
-                        
-                        // Clear session storage
-                        sessionStorage.removeItem('user_id');
+                        console.log('Registration successful, redirecting to login in 2 seconds');
                         
                         // Redirect to login page after 2 seconds
                         setTimeout(() => {
                             window.location.href = '/login/';
                         }, 2000);
                     } else {
-                        showToast(data.message, 'error');
-                    }
-                } catch (error) {
-                    showToast('An error occurred. Please try again.', 'error');
-                    console.error('Error:', error);
-                } finally {
-                    this.disabled = false;
-                    this.querySelector('.spinner').style.display = 'none';
-                    this.querySelector('.btn-text').textContent = btnText;
-                }
-            });
-            
-            // Resend OTP
-            resendOtp.addEventListener('click', async function(e) {
-                e.preventDefault();
-                
-                // Get user ID from session storage
-                const userId = sessionStorage.getItem('user_id');
-                
-                if (!userId) {
-                    showToast('Session expired. Please register again.', 'error');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                    return;
-                }
-                
-                // Disable link
-                this.style.pointerEvents = 'none';
-                const originalText = this.textContent;
-                this.textContent = 'Sending...';
-                
-                try {
-                    const response = await fetch('/api/resend-otp/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            user_id: userId
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        showToast('OTP resent successfully!', 'success');
+                        showToast(data.message || 'Registration failed. Please try again.', 'error');
+                        console.error('Registration failed:', data);
                         
-                        // Clear OTP fields
-                        otpInputFields.forEach(input => {
-                            input.value = '';
-                        });
-                        otpInputFields[0].focus();
-                    } else {
-                        showToast(data.message, 'error');
+                        // Re-enable the button
+                        this.disabled = false;
+                        this.innerHTML = btnText;
                     }
                 } catch (error) {
                     showToast('An error occurred. Please try again.', 'error');
                     console.error('Error:', error);
-                } finally {
-                    // Re-enable link after 30 seconds (prevent spam)
-                    setTimeout(() => {
-                        this.style.pointerEvents = 'auto';
-                        this.textContent = originalText;
-                    }, 30000);
+                    
+                    // Re-enable the button
+                    this.disabled = false;
+                    this.innerHTML = btnText;
                 }
             });
             
@@ -1444,6 +1308,9 @@
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
                 toast.textContent = message;
+                const timer = document.createElement('div');
+                timer.className = 'toast-timer';
+                toast.appendChild(timer);
                 document.querySelector('.toast-container').appendChild(toast);
 
                 setTimeout(() => {
@@ -1451,7 +1318,7 @@
                     setTimeout(() => {
                         toast.remove();
                     }, 300);
-                }, 3000);
+                }, 5000);
             }
         });
     </script>

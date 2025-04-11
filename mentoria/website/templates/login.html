@@ -25,7 +25,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Iceberg', sans-serif;
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--medium-gray) 100%);
             min-height: 100vh;
             margin: 0;
@@ -311,8 +311,8 @@
         .simple-toast {
             position: fixed;
             top: 20px;
-            left: 20px;
-            padding: 10px 20px;
+            right: 20px;
+            padding: 12px 20px;
             border-radius: 4px;
             color: white;
             font-size: 14px;
@@ -321,6 +321,7 @@
             opacity: 0;
             transform: translateY(-20px);
             transition: all 0.3s ease;
+            min-width: 250px;
         }
         
         .simple-toast.success {
@@ -334,6 +335,23 @@
         .simple-toast.show {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Timer bar for toast notifications */
+        .toast-timer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 100%;
+            transform-origin: left;
+            animation: timer-countdown 5s linear forwards;
+        }
+
+        @keyframes timer-countdown {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -417,7 +435,7 @@
                                     <a href="#" class="forgot-password">Forgot Password?</a>
                                 </div>
                                 <div class="register">
-                                    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+                                    <p>Don't have an account? <a href="{% url 'register_user' %}">Register</a></p>
                                 </div>
                                 <button type="submit" class="btn">Login</button>
                             </form>
@@ -452,7 +470,13 @@
             // Create toast element
             const toast = document.createElement('div');
             toast.className = `simple-toast ${type}`;
-            toast.textContent = message;
+            toast.innerHTML = message;
+            
+            // Add timer bar
+            const timerBar = document.createElement('div');
+            timerBar.className = 'toast-timer';
+            toast.appendChild(timerBar);
+            
             document.body.appendChild(toast);
             
             // Force a reflow before adding the show class
@@ -470,25 +494,6 @@
                     toast.remove();
                 }, 300);
             }, 5000);
-        }
-
-        // Test button (will be removed in production)
-        function testToast() {
-            showSimpleToast('This is a test error message!', 'error');
-        }
-        
-        // Add a test button to test the toast (for debugging only)
-        if (!document.getElementById('test-toast-btn')) {
-            const testBtn = document.createElement('button');
-            testBtn.id = 'test-toast-btn';
-            testBtn.className = 'btn btn-sm btn-outline-secondary mt-3';
-            testBtn.textContent = 'Test Toast';
-            testBtn.style.position = 'fixed';
-            testBtn.style.bottom = '20px';
-            testBtn.style.left = '20px';
-            testBtn.style.zIndex = '9999';
-            testBtn.onclick = testToast;
-            document.body.appendChild(testBtn);
         }
 
         // Form submission handling
@@ -530,13 +535,6 @@
                 submitBtn.innerHTML = 'Login';
                 console.error('Error:', error);
             });
-        });
-
-        // Trigger a test toast after page load for debugging
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                testToast();
-            }, 1000);
         });
     </script>
 </body>

@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mentoria_db',
-        'USER': 'admin',
-        'PASSWORD': 'Dino033!',  # Change this to a secure password
-        'HOST': 'mentoria.cn42esc2owye.eu-north-1.rds.amazonaws.com',
+        'USER': 'root',
+        'PASSWORD': 'Mani@2004',  # Change this to a secure password
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -117,6 +117,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mkgandhioff@gmail.com'  # Change this to your email
 EMAIL_HOST_PASSWORD = 'dsdf oswj umsk ysgn'  # Use app password for Gmail
+DEFAULT_FROM_EMAIL = 'Mentoria Institute <noreply@mentoriainstitute.com>'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
