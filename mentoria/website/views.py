@@ -24,11 +24,8 @@ def login_view(request):
             user = authenticate(request, email=email, password=password)
             
             if user is not None:
-                if user.is_email_verified:
-                    login(request, user)
-                    return JsonResponse({'success': True, 'message': 'Login successful!'})
-                else:
-                    return JsonResponse({'success': False, 'message': 'Please verify your email address first.'})
+                login(request, user)
+                return JsonResponse({'success': True, 'message': 'Login successful!'})
             else:
                 return JsonResponse({'success': False, 'message': 'Invalid email or password.'})
         else:
@@ -36,87 +33,12 @@ def login_view(request):
             user = authenticate(request, email=email, password=password)
             
             if user is not None:
-                if user.is_email_verified:
-                    login(request, user)
-                    return redirect('index')
-                else:
-                    messages.error(request, 'Please verify your email address first.')
+                login(request, user)
+                return redirect('index')
             else:
                 messages.error(request, 'Invalid email or password.')
     
     return render(request, 'login.html')
-
-@csrf_exempt
-def verify_otp(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            user_id = data.get('user_id')
-            otp_code = data.get('otp_code')
-            
-            # Get the latest unused OTP for this user
-            try:
-                user = User.objects.get(id=user_id)
-                otp = OTP.objects.filter(
-                    user=user,
-                    otp_code=otp_code,
-                    is_used=False,
-                    expires_at__gt=timezone.now()
-                ).latest('created_at')
-                
-                # Mark OTP as used
-                otp.is_used = True
-                otp.save()
-                
-                # Mark user as verified
-                user.is_email_verified = True
-                user.save()
-                
-                return JsonResponse({'success': True, 'message': 'Email verified successfully!'})
-                
-            except (User.DoesNotExist, OTP.DoesNotExist):
-                return JsonResponse({'success': False, 'message': 'Invalid or expired OTP'})
-                
-        except Exception as e:
-            return JsonResponse({'success': False, 'message': f'Error: {str(e)}'})
-    
-    return JsonResponse({'success': False, 'message': 'Method not allowed'})
-
-@csrf_exempt
-def resend_otp(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            user_id = data.get('user_id')
-            
-            try:
-                user = User.objects.get(id=user_id)
-                
-                # Generate new OTP
-                otp_code = ''.join(random.choices(string.digits, k=6))
-                expiry_time = timezone.now() + timedelta(minutes=10)
-                
-                OTP.objects.create(
-                    user=user,
-                    otp_code=otp_code,
-                    expires_at=expiry_time
-                )
-                
-                # In a real implementation, send an email with the OTP
-                # For now, just return success with the OTP (in production, don't send OTP in response)
-                return JsonResponse({
-                    'success': True, 
-                    'message': 'OTP resent successfully!',
-                    'otp': otp_code  # Remove this in production
-                })
-                
-            except User.DoesNotExist:
-                return JsonResponse({'success': False, 'message': 'User not found'})
-                
-        except Exception as e:
-            return JsonResponse({'success': False, 'message': f'Error: {str(e)}'})
-    
-    return JsonResponse({'success': False, 'message': 'Method not allowed'})
 
 @csrf_exempt
 def register_user(request):
@@ -202,19 +124,7 @@ def register_user(request):
                     designation=designation or ""
                 )
             
-            # Generate OTP for email verification
-            otp_code = ''.join(random.choices(string.digits, k=6))
-            expiry_time = timezone.now() + timedelta(minutes=10)
-            
-            OTP.objects.create(
-                user=user,
-                otp_code=otp_code,
-                expires_at=expiry_time
-            )
-            
-            # In production, send an actual email with the OTP
-            # For now, return the OTP in the response (remove in production)
-            
+        
             # Return successful response
             response_data = {
                 'success': True, 
