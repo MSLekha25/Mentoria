@@ -9,12 +9,21 @@ import json
 import random
 import string
 from .models import User, Student, Professional, OTP
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
 
 def index(request):
     return render(request, 'index.html')
 
 def programs(request):
     return render(request, 'programs.html')
+
+def courses(request):
+    return render(request, 'courses.html')
 
 @csrf_exempt
 def login_view(request):
@@ -160,3 +169,106 @@ def contact(request):
 
 def forgot_password(request):
     return render(request, 'contact.html')
+
+def reset_password_request(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            
+            # Generate token and UID
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            
+            # Build reset URL using request's build_absolute_uri
+            reset_path = f'/reset_password/{uid}/{token}/'
+            reset_url = f"{settings.SITE_PROTOCOL}://{settings.SITE_DOMAIN}{reset_path}"
+            
+            try:
+                # Prepare email content
+                context = {
+                    'user': user,
+                    'reset_url': reset_url,
+                    'site_name': 'Mentoria'
+                }
+                
+                email_html = render_to_string('emails/password_reset_email.html', context)
+                
+                # Send email
+                send_mail(
+                    subject='Reset your Mentoria password',
+                    message=str(reset_url),  # Simple text fallback
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[user.email],
+                    html_message=email_html,
+                    fail_silently=False,
+                )
+                
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({
+                        'success': True,
+                        'message': 'Password reset link has been sent to your email.'
+                    })
+                messages.success(request, 'Password reset link has been sent to your email.')
+                return redirect('login')
+                
+            except Exception as e:
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({
+                        'success': False,
+                        'message': 'Failed to send reset email. Please try again.'
+                    }, status=500)
+                messages.error(request, 'Failed to send reset email. Please try again.')
+                return redirect('login')
+            
+        except User.DoesNotExist:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': 'No account found with this email address.'
+                })
+            messages.error(request, 'No account found with this email address.')
+            return redirect('login')
+    
+    # Handle GET request
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid request method.'
+        }, status=400)
+    return render(request, 'reset_password.html')
+
+def reset_password_confirm(request, uidb64, token):
+    try:
+        # Decode the UID
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        
+        # Verify token
+        if not default_token_generator.check_token(user, token):
+            messages.error(request, 'Password reset link is invalid or has expired.')
+            return redirect('login')
+        
+        if request.method == 'POST':
+            password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
+            
+            if password != confirm_password:
+                messages.error(request, 'Passwords do not match.')
+                return render(request, 'reset_password_confirm.html')
+            
+            # Set new password
+            user.set_password(password)
+            user.save()
+            
+            messages.success(request, 'Your password has been reset successfully. You can now login with your new password.')
+            return redirect('login')
+        
+        return render(request, 'reset_password_confirm.html')
+        
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        messages.error(request, 'Password reset link is invalid or has expired.')
+        return redirect('login')
+
+def reset_password_done(request):
+    return render(request, 'reset_password_done.html')

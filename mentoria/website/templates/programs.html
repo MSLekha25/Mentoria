@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentoria Institute</title>
-    <link rel="icon" type="image/jpg" href="/static/logo.jpg">
+    <title>Programs - Mentoria</title>
+    <link rel="icon" type="image/jpg" href="/static/favicon.png">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -122,6 +122,183 @@
                 backdrop-filter: blur(10px);
             }
         }
+
+        .programs-section {
+        padding: 120px 0 60px;
+        background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
+    }
+
+    .programs-section h1 {
+        color: var(--light-text);
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .program-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .program-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .program-card.featured {
+        background: rgba(52, 152, 219, 0.2);
+        border: 2px solid var(--accent-color);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .program-card.featured::before {
+        content: 'Popular Choice';
+        position: absolute;
+        top: 20px;
+        right: -35px;
+        background: var(--accent-color);
+        color: white;
+        padding: 5px 40px;
+        transform: rotate(45deg);
+        font-size: 0.8rem;
+    }
+
+    .program-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .program-header h2 {
+        color: var(--accent-color);
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .price {
+        font-size: 2rem;
+        color: var(--light-text);
+        font-weight: bold;
+    }
+
+    .program-features {
+        margin-bottom: 2rem;
+    }
+
+    .feature-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-item:last-child {
+        border-bottom: none;
+    }
+
+    .feature-label {
+        color: var(--light-text);
+        opacity: 0.9;
+    }
+
+    .feature-value {
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+
+    .feature-value:not([data-value="No"]) {
+        color: #2ecc71;
+    }
+
+    .feature-value[data-value="No"] {
+        color: #e74c3c;
+    }
+
+    .program-footer {
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--accent-hover);
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 992px) {
+        .program-card {
+            margin-bottom: 2rem;
+        }
+    }
+
+        .footer {
+            background: rgba(26, 35, 126, 0.95);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
     </style>
 
     <!-- Google Font -->
@@ -133,7 +310,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'index' %}">
             <img src="/static/logo.jpg" alt="Mentoria Institute Logo">
             <div class="brand-text">
                 Mentoria <span style="color: #3498db;">Institute</span>
@@ -158,7 +335,7 @@
                     <a class="nav-link" href="{% url 'programs' %}"> Programs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Courses</a>
+                    <a class="nav-link" href="{% url 'courses' %}#">Courses</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -173,6 +350,281 @@
         </div>
     </div>
 </nav>
+
+<!-- Programs Section -->
+<section class="programs-section">
+    <div class="container">
+        <h1 class="text-center mb-5">Our Programs</h1>
+        <div class="row g-4">
+            <!-- Essential Program -->
+            <div class="col-lg-4">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h2>Mentoria Essential</h2>
+                        <div class="price">₹999/-</div>
+                    </div>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <span class="feature-label">Exclusive Mentorship</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Interview Preparation</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Optimised Resume course</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Corporate communication</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Q/A Panel</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">F2f Mock interviews with real HR's</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Personal Prep on Each Interview</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Placement Assistance</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Tech skills training</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Management skills Training</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Entrepreneurship Mentor</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Masters Mentor</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">International Exams prep Mentorship</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">toast masters</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gold Program -->
+            <div class="col-lg-4">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <h2>Mentoria Gold</h2>
+                        <div class="price">₹1599/-</div>
+                    </div>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <span class="feature-label">Exclusive Mentorship</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Interview Preparation</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Optimised Resume course</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Corporate communication</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Q/A Panel</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">F2f Mock interviews with real HR's</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Personal Prep on Each Interview</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Placement Assistance</span>
+                            <span class="feature-value">No</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Tech skills training</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Management skills Training</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Entrepreneurship Mentor</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Masters Mentor</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">International Exams prep Mentorship</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">toast masters</span>
+                            <span class="feature-value">Basic</span>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platinum Program -->
+            <div class="col-lg-4">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h2>Mentoria Platinum</h2>
+                        <div class="price">₹1999/-</div>
+                    </div>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <span class="feature-label">Exclusive Mentorship</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Interview Preparation</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Optimised Resume course</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Corporate communication</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Q/A Panel</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">F2f Mock interviews with real HR's</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Personal Prep on Each Interview</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Placement Assistance</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Tech skills training</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Management skills Training</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Entrepreneurship Mentor</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Masters Mentor</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">International Exams prep Mentorship</span>
+                            <span class="feature-value">Yes</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">toast masters</span>
+                            <span class="feature-value">Advance</span>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Information -->
+            <div class="col-md-4 footer-content">
+                <h5>Contact Us</h5>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt me-2"></i> Secunderabad, Telangana, India</li>
+                    <li><i class="fas fa-phone me-2"></i> <a href="tel:+919550156320">+91 9550156320</a></li>
+                    <li><i class="fas fa-envelope me-2"></i> <a href="mailto:support@mentoriainstitute.com">support@mentoriainstitute.com</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-4 footer-content">
+                <h5>Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div class="col-md-4 footer-content">
+                <h5>Follow Us</h5>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/mentoriainstitute?igsh=Z3JiZjRvMjdsdHk2"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="mt-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p class="mb-0">&copy; 2025 Mentoria Institute. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

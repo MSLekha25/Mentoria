@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-l4mq*a^ably7&w(uh_3(epr41%%hs%gh^$ei&qbv1fqd_04_ul
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mentoria-website.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -112,13 +113,26 @@ AUTH_USER_MODEL = 'website.User'
 
 # Email settings for OTP verification
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Change this to your email provider
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mkgandhioff@gmail.com'  # Change this to your email
-EMAIL_HOST_PASSWORD = 'dsdf oswj umsk ysgn'  # Use app password for Gmail
+EMAIL_HOST_USER = 'mkgandhioff@gmail.com'
+EMAIL_HOST_PASSWORD = 'dsdf oswj umsk ysgn'
 DEFAULT_FROM_EMAIL = 'Mentoria Institute <noreply@mentoriainstitute.com>'
 
+# Site Configuration
+if DEBUG:
+    # Development settings
+    SITE_DOMAIN = 'localhost:8000'
+    SITE_PROTOCOL = 'http'
+else:
+    # Production settings
+    SITE_DOMAIN = 'mentoriainstitute.com'  # or 'www.mentoriainstitute.com'
+    SITE_PROTOCOL = 'https'
+
+# Function to build absolute URIs
+def build_absolute_uri(path):
+    return f"{SITE_PROTOCOL}://{SITE_DOMAIN}{path}"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
