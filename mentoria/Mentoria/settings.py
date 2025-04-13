@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l4mq*a^ably7&w(uh_3(epr41%%hs%gh^$ei&qbv1fqd_04_ul
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.60.88.230', 'mentoriainstitute.com', 'www.mentoriainstitute.com', 'localhost:8000', '127.0.0.1:8000', 'mentoriainstitute.com:8000', 'www.mentoriainstitute.com:8000']
 
 
 # Application definition
@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mentoria_db',
-        'USER': 'root',
-        'PASSWORD': 'Mani@2004',  # Change this to a secure password
-        'HOST': 'localhost',
+        'USER': 'admin',
+        'PASSWORD': 'Dino033!',  # Change this to a secure password
+        'HOST': 'mentoria.cn42esc2owye.eu-north-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -149,9 +149,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -299,6 +299,33 @@
             margin-top: 40px;
             text-align: center;
         }
+
+        /* Shining and Glowing Effects */
+        .shine-silver {
+            color: #E8E8E8;
+            text-shadow: 0 0 2px #C0C0C0, 0 0 4px #C0C0C0;
+            animation: shine 2s infinite;
+            font-weight: bold;
+        }
+        
+        .shine-gold {
+            color: #FFD700;
+            text-shadow: 0 0 2px #B8860B, 0 0 4px #DAA520;
+            animation: shine 2s infinite;
+            font-weight: bold;
+        }
+        
+        .shine-platinum {
+            color: #E5E4E2;
+            text-shadow: 0 0 2px #A9A9A9, 0 0 4px #C0C0C0;
+            animation: shine 2s infinite;
+            font-weight: bold;
+        }
+        
+        @keyframes shine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
     </style>
 
     <!-- Google Font -->
@@ -360,7 +387,7 @@
             <div class="col-lg-4">
                 <div class="program-card">
                     <div class="program-header">
-                        <h2>Mentoria Essential</h2>
+                        <h2>Mentoria <span class="shine-silver">Essential</span></h2>
                         <div class="price">₹999/-</div>
                     </div>
                     <div class="program-features">
@@ -431,7 +458,7 @@
             <div class="col-lg-4">
                 <div class="program-card featured">
                     <div class="program-header">
-                        <h2>Mentoria Gold</h2>
+                        <h2>Mentoria <span class="shine-gold">Gold</span></h2>
                         <div class="price">₹1599/-</div>
                     </div>
                     <div class="program-features">
@@ -502,7 +529,7 @@
             <div class="col-lg-4">
                 <div class="program-card">
                     <div class="program-header">
-                        <h2>Mentoria Platinum</h2>
+                        <h2>Mentoria <span class="shine-platinum">Platinum</span></h2>
                         <div class="price">₹1999/-</div>
                     </div>
                     <div class="program-features">
