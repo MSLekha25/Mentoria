@@ -13,6 +13,9 @@ from .models import User, Student, Professional, OTP
 def index(request):
     return render(request, 'index.html')
 
+def programs(request):
+    return render(request, 'programs.html')
+
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
@@ -128,9 +131,8 @@ def register_user(request):
             # Return successful response
             response_data = {
                 'success': True, 
-                'message': 'Registration successful! Please verify your email.',
+                'message': 'Registration successful!',
                 'user_id': user.id,
-                'otp': otp_code  # Remove this in production
             }
             print(f"Successful registration for {email}")
             return JsonResponse(response_data)

@@ -24,6 +24,20 @@
             --gradient-end: #34495e;
         }
 
+        /* Improved Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
         body {
             font-family: 'Iceberg', sans-serif;
             background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
@@ -34,10 +48,10 @@
         }
 
         .navbar {
-            backdrop-filter: blur(5px);
-            margin: 0;
+            padding: 1rem 2rem;
             background: rgba(26, 35, 126, 0.95) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .navbar-brand {
@@ -55,17 +69,56 @@
             transition: all 0.3s ease;
         }
 
+        .navbar-brand img:hover {
+            box-shadow: 0 0 20px rgba(248, 248, 242, 0.5);
+        }
+
+        .brand-text {
+            margin-left: 1rem;
+            line-height: 1.2;
+            color: var(--off-white);
+        }
+
+        .brand-text span {
+            display: block;
+        }
+
         .nav-link {
             color: var(--off-white) !important;
             margin: 0 10px;
-            transition: all 0.3s ease;
-            position: relative;
             padding: 0.5rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         .nav-link:hover {
             color: var(--light-gray) !important;
             transform: scale(1.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                background: rgba(26, 35, 126, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+            }
         }
 
         /* About Page Specific Styles */
@@ -317,10 +370,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">
+            <a class="navbar-brand" href="#">
                 <img src="/static/logo.jpg" alt="Mentoria Institute Logo">
+                <div class="brand-text">
+                    Mentoria <span style="color: #3498db;">Institute</span>
+                </div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -329,11 +386,26 @@
                         <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'about' %}">About</a>
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'programs' %}"> Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

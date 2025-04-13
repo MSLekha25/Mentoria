@@ -17,62 +17,83 @@
             --light-text: #ffffff;
             --accent-color: #3498db;
             --accent-hover: #2980b9;
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.1);
             --card-border: rgba(255, 255, 255, 0.2);
             --hover-brightness: 1.1;
             --gradient-start: #1a237e;
             --gradient-end: #34495e;
         }
 
+        /* Improved Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
         body {
             font-family: 'Iceberg', sans-serif;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--medium-gray) 100%);
+            background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--medium-gray) 100%);
             min-height: 100vh;
+            color: var(--light-text);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
         }
 
         .navbar {
+            padding: 1rem 2rem;
             background: rgba(26, 35, 126, 0.95) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .navbar-brand {
+            padding: 0;
+            margin-right: 2rem;
             display: flex;
             align-items: center;
         }
 
         .navbar-brand img {
-            height: 50px;
-            width: 50px;
+            height: 65px;
+            width: 65px;
             border-radius: 50%;
             box-shadow: 0 0 15px rgba(248, 248, 242, 0.3);
             transition: all 0.3s ease;
         }
 
-        .navbar-brand .brand-text {
+        .navbar-brand img:hover {
+            box-shadow: 0 0 20px rgba(248, 248, 242, 0.5);
+        }
+
+        .brand-text {
             margin-left: 1rem;
             line-height: 1.2;
             color: var(--off-white);
         }
 
-        .navbar-brand .brand-text span {
+        .brand-text span {
             display: block;
         }
 
         .nav-link {
             color: var(--off-white) !important;
             margin: 0 10px;
-            transition: all 0.3s ease;
-            position: relative;
             padding: 0.5rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         .nav-link:hover {
             color: var(--light-gray) !important;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .nav-link::after {
@@ -80,7 +101,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background: var(--off-white);
+            background: var(--accent-color);
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
@@ -91,6 +112,18 @@
             width: 100%;
         }
 
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-nav {
+                background: rgba(26, 35, 126, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+            }
+        }
         .main-container {
             flex: 1;
             display: flex;
@@ -354,7 +387,7 @@
             to { transform: scaleX(0); }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -364,33 +397,21 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="/static/logo.jpg" alt="Mentoria Logo">
+            <a class="navbar-brand" href="#">
+                <img src="/static/logo.jpg" alt="Mentoria Institute Logo">
                 <div class="brand-text">
                     Mentoria <span style="color: #3498db;">Institute</span>
-                    <span>Learn and Grow</span>
                 </div>
             </a>
-            <a href="{% url 'index' %}" class="mobile-home-icon"><i class="fas fa-home"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+    
+            <!-- Home Icon (Mobile) -->
+            <a href="{% url 'index' %}" class="nav-link d-lg-none text-white">
+                <i class="fas fa-home fa-lg"></i>
+            </a>
+    
+            <!-- Normal nav (No collapse) -->
+            <div class="navbar-nav ms-auto d-none d-lg-flex">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
             </div>
         </div>
     </nav>
