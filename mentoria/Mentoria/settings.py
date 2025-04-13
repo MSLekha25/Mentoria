@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l4mq*a^ably7&w(uh_3(epr41%%hs%gh^$ei&qbv1fqd_04_ul
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.60.88.230', 'mentoriainstitute.com', 'www.mentoriainstitute.com', 'localhost:8000', '127.0.0.1:8000', 'mentoriainstitute.com:8000', 'www.mentoriainstitute.com:8000']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '16.16.114.253', 'mentoriainstitute.com', 'www.mentoriainstitute.com', 'localhost:8000', '127.0.0.1:8000', 'mentoriainstitute.com:8000', 'www.mentoriainstitute.com:8000']
 
 
 # Application definition
